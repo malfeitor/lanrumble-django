@@ -1,0 +1,3 @@
+/etc/init.d/nginx start
+daphne -u aquoiquonjoue.sock -e ssl:8000:privateKey=ca.key:certKey=ca.crt aquoiquonjoue.asgi:application
+redis server (pour les websockets) https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-redis-on-ubuntu-16-04

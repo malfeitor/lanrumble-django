@@ -1,0 +1,24 @@
+ul{
+    list-style: none;
+}
+li.nav-item{
+    margin: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    text-align: center;
+}
+.content_holder{
+    position: relative;
+    top: 100px;
+    padding-bottom: 100px;
+}
+table, th, tr {
+    text-align: center;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 10px;
+}
+tr:hover{
+    background-color: rgba(255,255,255,.1);
+}

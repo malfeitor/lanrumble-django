@@ -1,0 +1,54 @@
+{% extends "jeux/core.html" %}
+{% block content %}
+<div class="container content_holder">
+    <h1>Bienvenue sur : A quoi qu'on joue !</h1>
+        <p><h3>Liste des jeux dans la Base de données :</h3>
+            <ul>
+                {% for jeu in jeux %}
+                <li>{{ jeu.nom }}</li>
+                {% endfor %}
+            </ul>
+        </p>
+</div>
+{% endblock content %}
+{% block script %}
+<script>
+    function ordre_li(ou){
+        liste_noms = $(ou).get();
+        liste_noms.sort(function(a,b){
+            if($(a).text().trim() < $(b).text().trim()) return -1;
+            if($(a).text().trim() > $(b).text().trim()) return 1;
+            return 0;
+        });
+        $(liste_noms).each(function(i, li){
+            $(ou).parent().append(li);
+        });
+    }
+    $(document).ready(function(){
+        $("#pseudo").focus(function(){
+            if($("#pseudo").val() == "Pseudo :"){
+                $('#pseudo').val("");
+            }
+        });
+        $("#pseudo").blur(function(){
+            if($("#pseudo").val() == ""){
+                $("#pseudo").val("Pseudo :"); 
+            }
+        });
+        $("#pass").focus(function(){
+            if($("#pass").val() == "Mot de passe :"){
+                $('#pass').val("");
+            }
+        });
+        $("#pass").blur(function(){
+            if($("#pass").val() == ""){
+                $("#pass").val("Mot de passe :"); 
+            }
+        });
+        if(window.location.pathname === '/' || window.location.pathname === '/login'){
+            $("#link-accueil").addClass('active');
+        }
+        ordre_li('ul li');
+    });
+</script>
+{% endblock script %}

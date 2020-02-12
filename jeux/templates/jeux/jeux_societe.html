@@ -1,0 +1,98 @@
+{% extends "jeux/core.html" %}
+{% load static %}
+{% block content %}
+<div class="container content_holder">
+    <div class="row justify-content-center">
+        <div class="col">
+            <p class="liste_amis">
+                <h3>Vos amis :</h3>
+                <ul>
+                    <li><input type="search" id="chercher_jeu" name="chercher_jeu" placeholder="Chercher un jeu..."></li><li><br></li>
+                    {% for ami in possesseurs_amis %}
+                        <li class="ami" id="{{ ami }}"><span class="ami"><i class="fas fa-times"></i> {{ ami }} </span><i class="fas fa-caret-down toggle_jeux_ami" id="{{ ami }}"></i></li>
+                            <ul class="jeu_ami" id="{{ ami }}" style="display: none;">
+                                {% for id, info in jeux.items %}
+                                    {% if ami in info.possede_par %}
+                                        <li id="{{ info.id }}">{{ info.nom }}</li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                    {% endfor %}
+                </ul>
+            </p>
+        </div>
+        <div class="col-lg-8">
+            <p id="jeux">
+                <h3>Jeux disponibles pour <input type="number" step="1" id="joueurs_presents" style="width: 70px;" value="1"> :</h3>
+                <table>
+                    <tr class="tete">
+                        <th class="nom">Nom</th>
+                        <th class="temps"><i class="fas fa-stopwatch"></i> Temps prévu</th>
+                        <th class="complexite"><i class="fas fa-brain"></i> Complexité</th>
+                        <th class="joueurs_min"><i class="fas fa-user"></i> Joueurs min.</th>
+                        <th class="joueurs_max"><i class="fas fa-users"></i> Joueurs max.</th>
+                    </tr>
+                    {% for id, info in jeux.items %}
+                    <tr id="{{ id }}" class="jeu">
+                        <th class="nom">{{ info.nom }}</th>
+                        <th class="temps">{{ info.temps_prevu }}</th>
+                        <th class="complexite">{{ info.complexite }}</th>
+                        <th class="joueurs_min">{{ info.joueurs_min }}</th>
+                        <th class="joueurs_max">{{ info.joueurs_max }}</th>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </p>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-lg">
+            <h3>Ajouter un jeu :</h3>
+            <form action="{% url 'jeux:ajouter_jeu_societe_bdd' %}" method="post">
+                {% csrf_token %}
+                <div class="form-row" id="bdd-div">
+                    <div class="col-xl-3 col-md-6 col-sm-12">
+                        <label for="nom">Nom :</label>
+                        <input class="form-control" type="text" id="nom" name="nom">
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-sm-12">
+                        <label for="temps_prevu"><i class="fas fa-stopwatch"></i> Temps prévu <i>(h)</i>:</label><br>
+                        <input type="number" step="1" value="0" id="temps_prevu_h" name="temps_prevu_h" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-sm-12">
+                        <label for="temps_prevu"><i class="fas fa-stopwatch"></i> Temps prévu <i>(min)</i>:</label><br>
+                        <input type="number" step="1" value="0" id="temps_prevu_min" name="temps_prevu_min" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-sm-12">
+                        <label for="complexite"><i class="fas fa-brain"></i> Complexité :</label><br>
+                        <input type="number" step="1" value="1" name="complexite" id="complexite" class="form-control form-control-sm" >
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-sm-12">
+                        <label for="joueurs_min"><i class="fas fa-user"></i> Joueurs min. :</label><br>
+                        <input type="number" step="1" value="1" name="joueurs_min" id="joueurs_min" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-sm-12">
+                        <label for="joueurs_max"><i class="fas fa-users"></i> Joueurs max. :</label><br>
+                        <input type="number" step="1" value="1" name="joueurs_max" id="joueurs_max" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-sm-12">
+                        <label for="joueurs_max"><i class="fas fa-users"></i> Possesseurs :</label><br>
+                        <select multiple name="possesseurs" class="form-control form-control-sm" id="liste_possesseurs_ajouter">
+                            {% for ami in amis %}
+                            <option value="{{ ami.utilisateur.username }}">{{ ami.utilisateur.username }}</option>
+                            {% endfor %}
+                        </select><br>
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-sm-12">
+                        <br>
+                        <button class="btn btn-outline-danger" type="submit" style="width: 100%;"><i class="fas fa-check"></i> Envoyer</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block script %}
+<script src="{% static 'jeux/js/jeux_societe.js' %}"></script>
+{% endblock script %}

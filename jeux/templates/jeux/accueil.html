@@ -1,0 +1,64 @@
+{% extends "jeux/core.html" %}
+{% load static %}
+{% block content %}
+<div class="container content_holder">
+    <div class="row justify-content-center">
+        <div class="col-sm-4">
+            <p class="liste_amis" >
+                <h3>Vos amis :</h3>
+                <ul>
+                    {% for ami, jeux in amis.items %}
+                    <li class="ami" id="{{ ami }}"><span class="ami"><i class="fas fa-times"></i> {{ ami }} </span><i class="fas fa-caret-down toggle_jeux_ami" id="{{ ami }}"></i>
+                        <ul class="jeu_ami" id="{{ ami }}" style="margin-left: -15px; display: none;">
+                            {% for jeu in jeux %}
+                            <li>
+                                {% for content in jeu %}
+                                    {{ content }}|
+                                {% endfor %}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </p>
+            <p>
+                <button type="button" class="btn btn-danger" id="btn-random-game"><i class="fas fa-dice"></i> Aléatoire</button><div id="random-game"></div>
+            </p>
+        </div>
+        <div class="col-md-8">
+            <p id="vos_jeux">
+                <h3>Vos jeux : <input type="search" id="chercher_amis" name="chercher_amis" placeholder="Chercher un jeu..."></h3>
+                <table style="width:100%;">
+                    <tr class="tete">
+                        <th class="selectable"><input type="checkbox" checked></th>
+                        <th class="nom">Nom</th>
+                        <th class="pvp"><i class="fas fa-users"></i> PvP</th>
+                        <th class="coop"><i class="fas fa-hands-helping"></i> Coop</th>
+                        <th class="f2p"><i class="fas fa-hand-holding-usd"></i> Free</th>
+                        <th class="hot_seat"><input type="checkbox" id="hot_seat_enabled">&nbsp
+                            <i class="fas fa-chair"></i> Hot Seat</th>
+                        <th class="online"><i class="fas fa-globe-africa"></i> Online</th>
+                        <th class="votes"><i class="fas fa-star"></i> Votes</th>
+                    </tr>
+                    {% for nom, jeu in liste_jeux.items %}
+                    <tr class="jeu" id="{{ jeu.id }}">
+                        <th class="selectable"><input type="checkbox" checked></th>
+                        <th class="nom">{{ nom }}</th>
+                        <th class="pvp">{{ jeu.pvp }}</th>
+                        <th class="coop">{{ jeu.coop }}</th>
+                        <th class="f2p">{{ jeu.f2p }}</th>
+                        <th class="hot_seat">{{ jeu.joueurs_hot_seat }}</th>
+                        <th class="online">{{ jeu.joueurs_online }}</th>
+                        <th class="votes">{{ jeu.my_vote }}</th>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block script %}
+<script src="{% static 'jeux/js/accueil.js' %}"></script>
+{% endblock script %}

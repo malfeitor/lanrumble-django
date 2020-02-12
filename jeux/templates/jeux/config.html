@@ -1,0 +1,72 @@
+{% extends "jeux/core.html" %}
+{% load static %}
+{% block content %}
+<div class="container content_holder">
+    <div class="row justify-content">
+        <h2>Mon compte :</h2>
+    </div>
+    <br>
+    <form action="{% url 'jeux:change_info' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group form check">
+            <div class="form-row">
+                <div class="col-sm">
+                    <h4>Configuration :</h4>
+                    <label for="pseudo">Pseudo :</label>
+                    <br>
+                    <input type="text" name="pseudo" value="{{ request.user.username }}" required>
+                    <br>
+                    <label for="mail">Addresse mail :</label>
+                    <br>
+                    <input type="text" name="email" value="{{ request.user.email }}">
+                    <br>
+                    <label for="password_new_1">Nouveau mot de passe :</label>
+                    <br>
+                    <input type="password" name="password_new_1">
+                    <br>
+                    <label for="password_new_2">Retapez le mot de passe :</label>
+                    <br>
+                    <input type="password" name="password_new_2">
+                </div>
+                <div class="col-sm">
+                    <h4>Couleurs :</h4>
+                    {% for item in form_colors %}
+                        {% if 'color' in item.name %}
+                            {{ item }} {{ item.label }}<br>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="col-sm-5">
+                    <h4><label for="fond_decran">Fond d'écran :</label></h4>
+                    {{ form_colors.background_file }}
+                </div>
+            </div>
+            <br><br><br><br><br><br><br>
+            <div class="form-row">
+                <div class="col-sm">
+                    <label for="password">Mot de passe actuel :</label>
+                    <br>
+                    <input type="password" name="password" required>
+                </div>
+                <div class="col-sm">
+                    <br>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="width: 100%;">Envoyer <i class="fas fa-sign-in-alt"></i></button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock content %}
+{% block script %}
+<script type="text/javascript">
+    $(document).ready(function(){
+        if(window.location.pathname === '/config'){
+            $("#link-config").addClass('active');
+        }
+    });
+</script>
+{% endblock script %}
+{% block style %}
+<style type="text/css">
+</style>
+{% endblock style %}

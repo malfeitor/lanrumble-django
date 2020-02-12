@@ -1,0 +1,136 @@
+{% extends "jeux/core.html" %}
+{% load static %}
+{% block content %}
+<div class="container content_holder">
+    <div class="row justify-content-center">
+        <div class="col-sm">
+            <h3>Jeux payants non possédés :</h3>
+            Cocher un jeu et valider pour l'ajouter à votre liste de jeux.<br>
+            <form action="{% url 'jeux:mes_jeux_ajouter' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group form check" id="ajouter-div">
+                    <br>
+                    <input type="search" id="ajouter-search" name="ajouter-search" placeholder="Chercher..." autocomplete="off" style="margin-left: 7%;">
+                    <br><br>
+                    <table>
+                        {% for jeu_bdd in jeux_bdd %}
+                        <tr id="tr-{{ jeu_bdd.id }}">
+                            <th>
+                                <input type="checkbox" class="form-check-input" value="{{ jeu_bdd.id }}" name="jeu" style="margin-top: -1.5%;">
+                            </th><th>
+                                <label for="{{ jeu_bdd.id }}" class="form-check-label">{{ jeu_bdd.nom }}</label>
+                            </th>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    <p style="margin-left: 7%; margin-top: 5%;">
+                        <button class="btn btn-outline-success" type="submit"><i class="fas fa-check"></i> Ajouter</button>
+                    </p>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm">
+            <h3>Mes jeux possédés :</h3>
+            Cocher un jeu et valider pour l'enlever de votre liste de jeux.<br>
+            Cliquez sur les étoiles pour modifier votre avis sur le jeu.<br>
+            <form action="{% url 'jeux:mes_jeux_enlever' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group form check" id="enlever-div">
+                    <br>
+                    <input type="search" id="enlever-search" name="enlever-search" placeholder="Chercher..." autocomplete="off" style="margin-left: 7%;">
+                    <br><br>
+                    <table>
+                        {% for jeu_poss in jeux_possedes %}
+                        <tr id="tr-{{ jeu_poss.id }}" class="jeu">
+                            <th>
+                                {% if not jeu_poss.f2p %}
+                                <input type="checkbox" class="form-check-input" value="{{ jeu_poss.id }}" name="jeu" style="margin-top: -1.5%;">
+                                {% endif %}
+                            </th><th>
+                                <label for="{{ jeu_poss.id }}" class="form-check-label">{{  jeu_poss.nom }}</label>
+                            </th><th> &nbsp | &nbsp
+                                <i class="fas fa-star" id="vote-1"></i>
+                                <i class="fas fa-star" id="vote-2"></i>
+                                <i class="fas fa-star" id="vote-3"></i>
+                                <i class="fas fa-star" id="vote-4"></i>
+                                <i class="fas fa-star" id="vote-5"></i>
+                            </th>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    <p style="margin-left: 7%; margin-top: 5%;">
+                        <button class="btn btn-outline-danger" type="submit"><i class="fas fa-check"></i> Enlever</button>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-lg">
+            <h3>Ajouter un jeu :</h3>
+            <form action="{% url 'jeux:ajouter_jeu_bdd' %}" method="post">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                        <label for="nom">Nom :</label><br>
+                        <input class="form-control" type="text" id="nom" name="nom" aria-label="Nom :" value="Nom :">
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                        <label for="coop">Coop :</label><br>
+                        <select class="form-control form-control-sm" id="coop" name="coop">
+                            <option value="False">Non</option><option value="True">Oui</option>
+                        </select>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                        <label for="pvp">PvP :</label><br>
+                        <select class="form-control form-control-sm" id="pvp" name="pvp">
+                            <option value="False">Non</option><option value="True">Oui</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                        <label for="f2p">Free to play :</label><br>
+                        <select class="form-control form-control-sm" id="f2p" name="f2p">
+                            <option value="False">Non</option><option value="True">Oui</option>
+                        </select>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                        <label for="hot-seat">Joueurs max hot seat :</label><br>
+                        <input type="number" step="1" value="1" id="hot-seat" name="hot-seat" style="width: 70px;">
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                        <label for="online">Joueurs max online :</label><br>
+                        <input type="number" step="1" value="0" id="online" name="online" style="width: 70px;">
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 last">
+                        <br>
+                        <button class="btn btn-outline-danger" type="submit" style="width: 100%;"><i class="fas fa-check"></i> Envoyer</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="votes" hidden="true">
+    {% for vote in votes %}
+    {{ vote.jeu_concerne.id }}/{{ vote.valeur }}*<br/>
+    {% endfor %}
+</div>
+{% endblock content %}
+{% block script %}
+<script  src="{% static 'jeux/js/mes_jeux.js' %}"></script>
+{% endblock %}
+{% block style %}
+<style type="text/css">
+    .f2p, .pvp, .coop{
+        width: 50px;
+    }
+    table, th, td {
+        text-align: left;
+        border: 0px solid white;
+        padding: 0px;
+        margin: 0px;
+    }
+</style>
+{% endblock %}

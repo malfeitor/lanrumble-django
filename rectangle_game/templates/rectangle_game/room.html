@@ -1,0 +1,113 @@
+{% extends "jeux/core.html" %}
+{% load static %}
+
+{% block title %}Rectangle Game !{% endblock title %}
+
+{% block colors %}
+    <style type="text/css">
+        body{
+            color: #fff;
+            background-color: #222;
+        }
+        nav{
+            color: #fff;
+            background-color: #111;
+        }
+        nav a{
+            color: #900;
+        }
+        nav a.active{
+            color: #f00;
+        }
+        nav a:hover{
+            color: #fff;
+        }
+        li.nav-item{
+            border-color: #300;
+        }
+    </style>
+{% endblock colors %}
+
+{% block content %}
+<div class="content_holder">
+    <div id="phaser-content" style="position: absolute; top: 50%; left: 30%; width: 640px; height: 640px;">
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script src="//cdn.jsdelivr.net/npm/phaser@3.2.1/dist/phaser.js"></script>
+<script type="text/javascript">
+    // var roomName = window.location.pathname.slice(16,-1);
+
+    // var chatSocket = new WebSocket(
+    //     'wss://' + window.location.host +
+    //     '/ws/rectangle_game/' + roomName + '/');
+
+    // chatSocket.onmessage = function(e) {
+    //     var data = JSON.parse(e.data);
+    //     var message = data['message'];
+    //     document.querySelector('#chat-log').value += (message + '\n');
+    // };
+
+    // chatSocket.onclose = function(e) {
+    //     console.error('Chat socket closed unexpectedly');
+    // };
+
+    // document.querySelector('#chat-message-input').focus();
+    // document.querySelector('#chat-message-input').onkeyup = function(e) {
+    //     if (e.keyCode === 13) {  // enter, return
+    //         document.querySelector('#chat-message-submit').click();
+    //     }
+    // };
+
+    // document.querySelector('#chat-message-submit').onclick = function(e) {
+    //     var messageInputDom = document.querySelector('#chat-message-input');
+    //     var message = messageInputDom.value;
+    //     chatSocket.send(JSON.stringify({
+    //         'message': message
+    //     }));
+
+    //     messageInputDom.value = '';
+    // };
+
+    // debut du code du jeu avec PHASER !
+    var gameScene = new Phaser.Scene('Game');
+
+    var config = {
+        type: Phaser.AUTO,
+        width: 640,
+        height: 640,
+        parent: 'phaser-content',
+        scene: gameScene
+    };
+
+    var game = new Phaser.Game(config);
+
+    // class Player0Rect extends Phaser.GameObjects{
+    //     constructor(config){
+
+    //     }
+    // }
+
+    gameScene.preload = function(){
+        this.load.image('background', "{% static 'rectangle_game/img/background.png' %}")
+    };
+
+    gameScene.create = function(){
+        var bg = this.add.sprite(0, 0, 'background');
+        bg.setOrigin(0,0);
+        // var joueur0 = new Phaser.Class(Rectangle(this, 0, 0, 16, 16, 0xff0000));
+        // bg.setOrigin(304,44);
+    };
+
+    gameScene.update = function() {
+ 
+        // check for active input
+        if (this.input.activePointer.isDown) {
+            console.log("Pointer DOWN");
+        }
+    };
+
+</script>
+{% endblock script %}
