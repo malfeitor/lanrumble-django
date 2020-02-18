@@ -139,7 +139,11 @@ def accueil(request, error_message=False):
                 liste_jeux[jeu.nom]['my_vote'] = Vote_Jeu_Video.objects.filter(joueur_concerne=joueur.id).filter(jeu_concerne=jeu.id).get().valeur
             except Exception as e:
                 liste_jeux[jeu.nom]['my_vote'] = 5
-        
+        # TODO DOING: alerter l'user si il n'a pas mis son mail dans la bdd
+        if (User.objects.get(username=joueur.utilisateur).email == ""):
+            request.session['error_message'] += 'Veuillez remplir votre addresse mail dans "Mon Compte".\\n'
+            request.session['error_not_seen'] = False
+
         return render(request, 'jeux/accueil.html',
                       {'amis': amis, 'liste_jeux': liste_jeux,
                        'colors': joueur_colors(request.user.id), 'background_image': joueur_background(request)})

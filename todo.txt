@@ -1,8 +1,0 @@
-DJ :	Page configuration utilisateur
-            ->  Changement couleurs du site
-    	Page amis
-            ->  Demande d'ami
-
-CSS : 	Rendre le tout BEAU !
-
-TODO:   Mettre des commentaires !!!

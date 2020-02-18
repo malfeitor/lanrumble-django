@@ -1,0 +1,1410 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"fun",
+				"function"
+			],
+			[
+				"a",
+				"args"
+			],
+			[
+				"login",
+				"login_required"
+			],
+			[
+				"is",
+				"is_user_connected"
+			],
+			[
+				"pass",
+				"passwd\tstatement"
+			],
+			[
+				"str",
+				"strftime\tfunction"
+			],
+			[
+				"log",
+				"log_file\tstatement"
+			],
+			[
+				"log_file",
+				"log_file_opened\tstatement"
+			],
+			[
+				"borde",
+				"border-radius\tproperty"
+			],
+			[
+				"rgb",
+				"rgba()\tbackground-color"
+			],
+			[
+				"lis",
+				"liste_jeux\tvar"
+			],
+			[
+				"hot",
+				"hot_seat_enabled\tlocal var"
+			],
+			[
+				"err",
+				"error_message"
+			],
+			[
+				"Exc",
+				"Exception\tclass"
+			],
+			[
+				"my",
+				"my_vote\tproperty"
+			],
+			[
+				"rea",
+				"real_vote\tproperty"
+			],
+			[
+				"get",
+				"get_real_vote\twarning"
+			],
+			[
+				"poss",
+				"possede_par\tproperty"
+			],
+			[
+				"pro",
+				"prototype\tproperty"
+			],
+			[
+				"pos",
+				"possesseur_name\twarning"
+			],
+			[
+				"vale",
+				"value\twarning"
+			],
+			[
+				"lo",
+				"log\tmethod"
+			],
+			[
+				"vote",
+				"vote_list\twarning"
+			],
+			[
+				"vote_",
+				"vote_value\tstatement"
+			],
+			[
+				"all",
+				"all_votes\tstatement"
+			],
+			[
+				"ajax",
+				"ajax_vote_videogame\tfunction"
+			],
+			[
+				"ma",
+				"ManyToManyField\tclass"
+			],
+			[
+				"Ma",
+				"ManyToManyField\tclass"
+			],
+			[
+				"joue",
+				"joueur_concerne"
+			],
+			[
+				"jeu",
+				"jeu_concerne"
+			],
+			[
+				"padding",
+				"padding-left\tproperty"
+			],
+			[
+				"alig",
+				"align-content\tproperty"
+			],
+			[
+				"margin-",
+				"margin-top\tproperty"
+			],
+			[
+				"margin",
+				"margin-top\tproperty"
+			],
+			[
+				"uti",
+				"utilisateur"
+			],
+			[
+				"jou",
+				"joueur_concerne\tstatement"
+			],
+			[
+				"Jeu",
+				"Jeu\tclass"
+			],
+			[
+				"sma",
+				"SmallIntegerField\tclass"
+			],
+			[
+				"jouu",
+				"Joueur\tclass"
+			],
+			[
+				"One",
+				"OneToOneField\tclass"
+			],
+			[
+				"rand",
+				"random"
+			],
+			[
+				"jeu_",
+				"jeu_clique"
+			],
+			[
+				"par",
+				"parent"
+			],
+			[
+				"tri",
+				"tri_votes"
+			],
+			[
+				"c",
+				"children"
+			],
+			[
+				"gam",
+				"gameScene"
+			],
+			[
+				"as",
+				"AsyncWebsocketConsumer\tclass"
+			],
+			[
+				"me",
+				"message\tstatement"
+			],
+			[
+				"te",
+				"text_data_json\tstatement"
+			],
+			[
+				"room",
+				"room_name"
+			],
+			[
+				"joeu",
+				"joueur_background\tfunction"
+			],
+			[
+				"joueu",
+				"joueur_background\tfunction"
+			],
+			[
+				"cher",
+				"chercher_jeu"
+			],
+			[
+				"clea",
+				"cleaned_data"
+			],
+			[
+				"background",
+				"background_file"
+			],
+			[
+				"pa",
+				"path\tmodule"
+			],
+			[
+				"ba",
+				"background_image"
+			],
+			[
+				"for",
+				"form\tstatement"
+			],
+			[
+				"form",
+				"forms\tmodule"
+			],
+			[
+				"Te",
+				"TextInput"
+			],
+			[
+				"Config",
+				"ConfigUserForm\tclass"
+			],
+			[
+				"color_body",
+				"color_body_background"
+			],
+			[
+				"color",
+				"color_body_background"
+			],
+			[
+				"colo",
+				"color_nav_text"
+			],
+			[
+				"ut",
+				"utilisateur_id"
+			],
+			[
+				"file",
+				"filename\tstatement"
+			],
+			[
+				"obj",
+				"objects"
+			],
+			[
+				"fil",
+				"filename\tstatement"
+			],
+			[
+				"color_na",
+				"color_nav_text"
+			],
+			[
+				"color_nav",
+				"color_nav_link_hover"
+			],
+			[
+				"color_nav_li",
+				"color_nav_link_active"
+			],
+			[
+				"color_body_",
+				"color_body_background"
+			],
+			[
+				"us",
+				"user"
+			],
+			[
+				"erro",
+				"error_seen"
+			],
+			[
+				"er",
+				"error_afficher\tstatement"
+			],
+			[
+				"f",
+				"fond_decran"
+			],
+			[
+				"na",
+				"nav_link_hover"
+			],
+			[
+				"pas",
+				"password1"
+			],
+			[
+				"li",
+				"liste_noms"
+			],
+			[
+				"ordre",
+				"order_select"
+			],
+			[
+				"fro",
+				"form-control-sm"
+			],
+			[
+				"or",
+				"ordre_li"
+			],
+			[
+				"fn",
+				"function"
+			],
+			[
+				"bor",
+				"border-radius\tproperty"
+			],
+			[
+				"temp",
+				"temps"
+			],
+			[
+				"b",
+				"break"
+			],
+			[
+				"tem",
+				"temps_prevu_m"
+			],
+			[
+				"border",
+				"border-color\tproperty"
+			],
+			[
+				"marg",
+				"margin\tproperty"
+			],
+			[
+				"temps",
+				"temps_prevu_min"
+			],
+			[
+				"def",
+				"default"
+			],
+			[
+				"val",
+				"valeur"
+			],
+			[
+				"co",
+				"coop"
+			],
+			[
+				"on",
+				"online"
+			],
+			[
+				"con",
+				"console"
+			],
+			[
+				"to",
+				"toLowerCase"
+			],
+			[
+				"amis",
+				"amis_presents"
+			],
+			[
+				"ins",
+				"insertAfter"
+			],
+			[
+				"ke",
+				"keyup"
+			],
+			[
+				"rem",
+				"removeClass"
+			],
+			[
+				"texte",
+				"texte_cherche"
+			],
+			[
+				"je",
+				"jeu_ajouter\tstatement"
+			],
+			[
+				"comp",
+				"complexite"
+			],
+			[
+				"ad",
+				"and\tkeyword"
+			],
+			[
+				"di",
+				"div\tTag"
+			],
+			[
+				"jeux",
+				"jeux_societe"
+			],
+			[
+				"ami",
+				"amis_presents"
+			],
+			[
+				"jo",
+				"joueurs_min"
+			],
+			[
+				"am",
+				"amis_presents"
+			],
+			[
+				"liste",
+				"liste_jeux\tstatement"
+			],
+			[
+				"joe",
+				"joueurs_min"
+			],
+			[
+				"lise",
+				"liste_jeux\tstatement"
+			],
+			[
+				"col",
+				"colors_list"
+			],
+			[
+				"id",
+				"id_jeu\tstatement"
+			],
+			[
+				"mes_jeu",
+				"mes_jeux"
+			],
+			[
+				"remo",
+				"removeFromArray"
+			],
+			[
+				"sear",
+				"search_jeu"
+			],
+			[
+				"tex",
+				"texte_cherche"
+			],
+			[
+				"ajou",
+				"ajouter_search"
+			],
+			[
+				"mes_jeux_enle",
+				"mes_jeux_enlever"
+			],
+			[
+				"nae",
+				"name"
+			],
+			[
+				"z",
+				"z-index\tproperty"
+			],
+			[
+				"link",
+				"link-accueil"
+			],
+			[
+				"inl",
+				"inline-block\tdisplay"
+			],
+			[
+				"nav",
+				"navbar"
+			],
+			[
+				"back",
+				"background-color\tproperty"
+			],
+			[
+				"text",
+				"text-align\tproperty"
+			],
+			[
+				"max",
+				"max_online"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/home/malfeitor/dev/Web/Django/aquoiquonjoue/rectangle_game/static/rectangle_game/js/rectangle_game_room.js",
+			"settings":
+			{
+				"buffer_size": 1224,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/models.py",
+			"settings":
+			{
+				"buffer_size": 2376,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/views.py",
+			"settings":
+			{
+				"buffer_size": 17167,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Anaconda Python Builder",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Anaconda Python Builder",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Anaconda Python Builder",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 400.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"ana",
+				"Anaconda: Autoformat PEP8 Errors"
+			],
+			[
+				"editor\t",
+				"Project: Edit Project"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"pep",
+				"Anaconda: Autoformat PEP8 Errors"
+			],
+			[
+				"svn up",
+				"SVN: Update"
+			],
+			[
+				"rein",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"anaconda",
+				"Build With: Anaconda Python Builder"
+			],
+			[
+				"a",
+				"Anaconda: Disable linting on this file"
+			],
+			[
+				"",
+				"Anaconda: Next lint error"
+			],
+			[
+				"reind",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"anac",
+				"Build With: Anaconda Python Builder"
+			],
+			[
+				"re",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"rei",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"mark",
+				"Set Syntax: Markdown"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"anaconda pep",
+				"Anaconda: Autoformat PEP8 Errors"
+			],
+			[
+				"pac",
+				"Package Control: Disable Package"
+			],
+			[
+				"pa",
+				"Package Control: Disable Package"
+			],
+			[
+				"pack",
+				"Package Control: List Packages"
+			],
+			[
+				"inden",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"set ",
+				"Set Syntax: TypeScript"
+			],
+			[
+				"pack up",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"package instal",
+				"Package Control: Install Package"
+			],
+			[
+				"bui",
+				"Build With: Python"
+			],
+			[
+				"python ",
+				"Build With: Python"
+			],
+			[
+				"svn ",
+				"SVN: Relocate…"
+			],
+			[
+				"anac lin",
+				"Anaconda: Disable linting on this file"
+			],
+			[
+				"sho",
+				"Anaconda: Show error list"
+			],
+			[
+				"anaconda lin",
+				"Anaconda: Disable linting on this file"
+			],
+			[
+				"show",
+				"Anaconda: Show error list"
+			],
+			[
+				"linter",
+				"SublimeLinter: Report (Open Files)"
+			],
+			[
+				"linter show",
+				"SublimeLinter: Show All Errors"
+			],
+			[
+				"show r",
+				"Anaconda: Show error list"
+			],
+			[
+				"svn ci",
+				"SVN: Commit…"
+			],
+			[
+				"show erro",
+				"Anaconda: Show error list"
+			],
+			[
+				"de",
+				"Origami: Destroy Current Pane"
+			],
+			[
+				"orig righ",
+				"Origami: Create Pane on the Right"
+			],
+			[
+				"svn",
+				"SVN: Relocate…"
+			],
+			[
+				"ana sho",
+				"Anaconda: Show error list"
+			],
+			[
+				"ana ",
+				"Anaconda: Show error list"
+			],
+			[
+				"ana lin",
+				"Anaconda: Next lint error"
+			],
+			[
+				"lint",
+				"SublimeLinter: Lint This View"
+			],
+			[
+				"svn co",
+				"SVN: Commit…"
+			],
+			[
+				"svn st",
+				"SVN: Status"
+			],
+			[
+				"in",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"inde",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"syn js",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"sv",
+				"SVN: Commit…"
+			],
+			[
+				"svn ign",
+				"SVN: (Folder) Ignore"
+			],
+			[
+				"ind",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"synta js",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"svn pr",
+				"SVN: (Folder) Properties…"
+			],
+			[
+				"ejs",
+				"Set Syntax: EJS (<% and %>)"
+			],
+			[
+				"latext",
+				"LaTeXTools: Reconfigure and migrate settings"
+			],
+			[
+				"latex",
+				"Build With: LaTeX"
+			],
+			[
+				"sublimerg",
+				"Sublimerge: Compare to Clipboard"
+			],
+			[
+				"sublim",
+				"SublimeLinter: Show All Errors"
+			],
+			[
+				"pack in",
+				"Package Control: Install Package"
+			],
+			[
+				"comm",
+				"Toggle Comment"
+			],
+			[
+				"java sett",
+				"Preferences: Javatar Settings – User"
+			],
+			[
+				"java",
+				"Javatar: Builds..."
+			],
+			[
+				"javata",
+				"Javatar: Create new..."
+			],
+			[
+				"pack li",
+				"Package Control: List Packages"
+			],
+			[
+				"pack ress",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"anaco bui",
+				"Build With: Anaconda Python Builder"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"me",
+				"View: Toggle Menu"
+			],
+			[
+				"pa ins",
+				"Package Control: Install Package"
+			],
+			[
+				"svn c",
+				"SVN: Commit…"
+			],
+			[
+				"menu",
+				"View: Toggle Menu"
+			],
+			[
+				"folder",
+				"Project: Add Folder"
+			]
+		],
+		"width": 519.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) ",
+			"sys.version",
+			"print python_version()",
+			"print python_version",
+			"print python_version()",
+			"from platform import python_version",
+			"from plateform import python_version",
+			"print python_version()",
+			"sys.version_info",
+			"import sys",
+			"version",
+			"from tkinter import *",
+			"from tkinter",
+			"python3",
+			"ls",
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/aquoiquonjoue",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/static",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/templates",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/templates/jeux"
+	],
+	"file_history":
+	[
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/templates/jeux/accueil.html",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/templates/jeux/core.html",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/static/jeux/js/mes_jeux.js",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/models.py",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/views.py",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/urls.py",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/templates/jeux/mes_jeux.html",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/static/jeux/css/index.css",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/static/jeux/js/accueil.js",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/management/commands/command.py",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/aquoiquonjoue/settings.py",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/.editorconfig",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/static/jeux/js/jeux_societe.js",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/templates/jeux/jeux_societe.html",
+		"/home/malfeitor/sublime-projects/aquoiquonjoue.sublime-project",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/static/jeux/js/jQuery.min.js",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/admin.py",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/rectangle_game/templates/rectangle_game/room.html",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/rectangle_game/views.py",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/rectangle_game/consumers.py",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/note_set_up.txt",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/static/rectangle_game/js/rectangle_game_room.js",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/rectangle_game/static/rectangle_game/js/rectangle_game_room.js",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/aquoiquonjoue/urls.py",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/rectangle_game/templates/rectangle_game/index.html",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/rectangle_game/templates/rectangle_game/core.html",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/chat/consumers.py",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/rectangle_game/urls.py",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/rectangle_game/routing.py",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/chat/routing.py",
+		"/home/malfeitor/dev/Lucky/Human-vs-bot-V0.0.1-CORE-RESSOURCES.py",
+		"/home/malfeitor/dev/Lucky/grid-V-0-0-1.py",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/chat/urls.py",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/chat/templates/chat/room.html",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/chat/views.py",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/chat/templates/chat/index.html",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/aquoiquonjoue/routing.py",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/aquoiquonjoue_nginx_asgi.conf",
+		"/home/malfeitor/dev/Web/Django/tuto_socket/chat/templates/chat/index.html",
+		"/home/malfeitor/dev/Web/Django/tuto_socket/tuto_socket/settings.py",
+		"/home/malfeitor/dev/Web/Django/tuto_socket/tuto_socket/routing.py",
+		"/home/malfeitor/dev/Web/Django/tuto_socket/chat/routing.py",
+		"/home/malfeitor/dev/Web/Django/tuto_socket/chat/consumers.py",
+		"/home/malfeitor/dev/Web/Django/tuto_socket/chat/urls.py",
+		"/home/malfeitor/dev/Web/Django/tuto_socket/tuto_socket/asgi.py",
+		"/home/malfeitor/dev/Web/Django/tuto_socket/tuto_socket_nginx.conf",
+		"/home/malfeitor/dev/Web/Django/tuto_socket/chat/templates/chat/room.html",
+		"/home/malfeitor/dev/Web/Django/tuto_socket/chat/views.py",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/aquoiquonjoue_nginx.conf",
+		"/home/malfeitor/dev/Web/Django/tuto_socket/uwsgi_params",
+		"/home/malfeitor/dev/Web/Django/tuto_socket/tuto_socket/urls.py",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/aquoiquonjoue_wsgi.ini",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/templates/jeux/mes_amis.html",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/forms.py",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/aquoiquonjoue/asgi.py",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/templates/jeux/config.html",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/script.py",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/templates/jeux/index.html",
+		"/home/malfeitor/dev/App/Python/YouTubeDownLoader/main.py",
+		"/home/malfeitor/dev/App/Python/KivyTuto/tuto0.py",
+		"/home/malfeitor/dev/App/Python/KivyTuto/tutoo.py",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/static/jeux/js/changements.js",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/svn_ignore.txt",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/aquoiquonjoue_socket.sock",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/static/jeux/js/colors.js",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/todo.txt",
+		"/home/malfeitor/Documents/fondue.md",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/db.sqlite3",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/static/jeux/images",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/templates/jeux/jeux_en_commun.html",
+		"/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/templates/jeux/amis_presents.html",
+		"/home/malfeitor/dev/Web/Django/tuto/mysite/polls/views.py",
+		"/home/malfeitor/dev/Web/Django/tuto/mysite/polls/urls.py",
+		"/home/malfeitor/dev/Web/Django/tuto/mysite/polls/templates/polls/details.html",
+		"/home/malfeitor/dev/Web/Django/tuto/mysite/polls/templates/polls/index.html",
+		"/home/malfeitor/dev/Web/Django/tuto/mysite/polls/templates/polls/results.html",
+		"/home/malfeitor/dev/Web/Django/tuto/mysite/polls/models.py",
+		"/home/malfeitor/dev/Web/Django/tuto/mysite/mysite/settings.py",
+		"/home/malfeitor/dev/Web/Django/tuto/mysite/polls/admin.py",
+		"/home/malfeitor/.config/sublime-text-3/Packages/User/Anaconda.sublime-settings",
+		"/home/malfeitor/.config/sublime-text-3/Packages/Anaconda/Anaconda.sublime-settings",
+		"/home/malfeitor/dev/Web/Django/tuto/mysite/mysite/urls.py",
+		"/home/malfeitor/dev/Web/Django/tuto/mysite/polls/apps.py",
+		"/home/malfeitor/dev/Web/Angular/tuto/TODO",
+		"/home/malfeitor/dev/Web/Angular/tuto/src/app/messages/messages.component.ts",
+		"/home/malfeitor/dev/Web/Angular/tuto/src/app/messages/messages.component.html",
+		"/home/malfeitor/dev/Web/Angular/tuto/src/app/message.service.ts",
+		"/home/malfeitor/dev/Web/Angular/tuto/src/app/app.component.html",
+		"/home/malfeitor/dev/Web/Angular/tuto/src/app/app-routing.module.ts",
+		"/home/malfeitor/dev/Web/Angular/tuto/src/app/hero.service.ts",
+		"/home/malfeitor/dev/Web/Angular/tuto/src/app/heroes/heroes.component.ts",
+		"/home/malfeitor/dev/Web/Angular/tuto/src/app/app.component.ts",
+		"/home/malfeitor/dev/Web/Angular/tuto/src/app/messages/messages.component.css",
+		"/home/malfeitor/dev/Web/Angular/tuto/src/app/hero-detail/hero-detail.component.ts",
+		"/home/malfeitor/dev/Web/Angular/tuto/src/app/hero-detail/hero-detail.component.html",
+		"/home/malfeitor/dev/Web/Angular/tuto/src/app/heroes/heroes.component.html",
+		"/home/malfeitor/dev/Web/Angular/tuto/src/app/heroes/heroes.component.css",
+		"/home/malfeitor/dev/Web/Angular/tuto/src/app/app.component.css",
+		"/home/malfeitor/dev/Web/Angular/tuto/src/app/app.module.ts",
+		"/home/malfeitor/dev/Web/Angular/tuto/src/app/mock-heroes.ts",
+		"/home/malfeitor/dev/Web/Angular/tuto/src/app/heroes/hero.ts",
+		"/home/malfeitor/dev/Web/Node/liste-jeux/core.js",
+		"/home/malfeitor/dev/Web/Node/liste-jeux/views/chambre.ejs",
+		"/home/malfeitor/dev/Web/Node/liste-jeux/views/todo.ejs",
+		"/home/malfeitor/dev/Web/Angular/liste-jeux/src/app/app.component.ts",
+		"/home/malfeitor/dev/Web/Angular/liste-jeux/src/app/joueurs/joueurs.component.html",
+		"/home/malfeitor/dev/Web/Angular/liste-jeux/src/app/joueurs/joueurs.component.ts",
+		"/home/malfeitor/dev/Web/Angular/liste-jeux/src/app/app.component.css",
+		"/home/malfeitor/.config/sublime-text-3/Packages/Default/auto_indent_tag.py",
+		"/home/malfeitor/dev/Web/Angular/liste_jeux/core.js",
+		"/home/malfeitor/.zshrc",
+		"/media/Windo/Oui/Dropbox/linux/post-install.sh",
+		"/home/malfeitor/dev/svn-commit.2.tmp",
+		"/home/malfeitor/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/home/malfeitor/dev/rootme/Prog/qrcode/main.py",
+		"/home/malfeitor/dev/Web/Django/new_site/polls/urls.py",
+		"/home/malfeitor/dev/Web/Django/new_site/polls/views.py",
+		"/home/malfeitor/dev/Web/Django/new_site/polls/admin.py",
+		"/home/malfeitor/dev/Web/Django/new_site/polls/models.py",
+		"/home/malfeitor/dev/Web/Django/new_site/polls/apps.py",
+		"/home/malfeitor/dev/Web/Django/new_site/new_site/urls.py",
+		"/home/malfeitor/dev/Web/Django/new_site/base/urls.py",
+		"/home/malfeitor/dev/Web/Django/new_site/base/views.py",
+		"/home/malfeitor/dev/Web/Django/new_site/new_site/settings.py",
+		"/home/malfeitor/dev/Web/Django/new_site/new_site/new_site/urls.py",
+		"/home/malfeitor/dev/Web/Django/new_site/new_site/polls/urls.py",
+		"/home/malfeitor/dev/Web/Django/new_site/new_site/polls/views.py",
+		"/home/malfeitor/dev/Web/Django/new_site/new_site/polls/models.py"
+	],
+	"find":
+	{
+		"height": 24.0
+	},
+	"find_in_files":
+	{
+		"height": 104.0,
+		"where_history":
+		[
+			"<current file>",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"var ",
+			"gestionnaire_erreur",
+			"hot",
+			"tri_",
+			"request.session['error_message'] +=",
+			"request.session['error_message'] =",
+			"\\n",
+			"request = gestionnaire_erreur(request)",
+			"gestionnaire_erreur(request)",
+			"request.session['error_not_seen'] = False",
+			"gestionnaire_erreur(request)",
+			"error_seen",
+			"list_presents",
+			"eac",
+			"attr",
+			"chat",
+			"malfeitor.duckdns.org",
+			"media/hdde/www",
+			"aquoiquonjoue",
+			"request.session['error_message'] = \"",
+			"\"col-md-6 col-sm-12\"",
+			"instance",
+			"&&",
+			"span c",
+			"span",
+			"for",
+			"bdd",
+			"joueur_colors",
+			"colors",
+			"id",
+			"'));\n",
+			"get_objec",
+			"pseudo",
+			"static",
+			"pep8\n\n",
+			"selectedHero",
+			"print (\"aA-zZ_ )*",
+			"):\n",
+			"cp ",
+			"é",
+			"list_folders",
+			"floatlayout",
+			"file",
+			"widget",
+			"';\n",
+			"this",
+			"self",
+			"2",
+			"append",
+			")\n",
+			"brain.ico",
+			"'UTF-8'",
+			"optio",
+			"server",
+			"connect.",
+			"connect",
+			".chat",
+			"\"ctrl+h\"",
+			"ctrl+h",
+			"ctrl+H",
+			"ctrl+h",
+			"replace",
+			".chat",
+			", Phaser.Easing.Sinuso",
+			"userna",
+			"indent",
+			"./",
+			"endif",
+			"~/conk",
+			"endif",
+			"if_",
+			"if",
+			"else",
+			"Drop",
+			"~/.conky",
+			"Dropbox/",
+			"replace",
+			"cmd"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"",
+			"request.session['error_message'] =",
+			"\\\\n",
+			"request = gestionnaire_erreur(request)",
+			"request.session['error_not_seen'] = True",
+			"request = gestionnaire_erreur(request)",
+			"error_not_seen",
+			"rectangle_game",
+			"0.0.0.0",
+			"home/malfeitor/dev/Web",
+			"tuto_socket",
+			"request.session['error_message'] += \"",
+			"\"col-xl-1 col-md-6 col-sm-12\"",
+			"and",
+			"username",
+			"hero",
+			"cp -f ",
+			"e",
+			"choose_folder",
+			"self",
+			"this",
+			"encoding",
+			".liste",
+			"/home/malfeitor/conky/kali/fixe/",
+			".",
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": false
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/home/malfeitor/dev/Web/Django/aquoiquonjoue/rectangle_game/static/rectangle_game/js/rectangle_game_room.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1224,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1224,
+								1224
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"use_tab_stops": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/models.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2376,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1499,
+								1499
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/home/malfeitor/dev/Web/Django/aquoiquonjoue/jeux/views.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 17167,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5365,
+								5365
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1575.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 24.0
+	},
+	"input":
+	{
+		"height": 34.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.494985290418,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.doc":
+	{
+		"height": 0.0
+	},
+	"output.exec":
+	{
+		"height": 177.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.sftp":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "Aquoiquonjoue_games.sublime-project",
+	"replace":
+	{
+		"height": 44.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/sublime-projects/aquoiquonjoue.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 400.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 900.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 239.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

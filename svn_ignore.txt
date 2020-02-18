@@ -1,8 +1,0 @@
-jeux/__pycache__/*
-aquoiquonjoue/__pycache__/*
-aquoiquonjoue/settings.py
-db.sqlite3
-aquoiquonjoue_nginx_uwsgi.conf
-aquoiquonjoue_nginx_asgi.conf
-aquoiquonjoue_wsgi.ini
-uwsgi_params
