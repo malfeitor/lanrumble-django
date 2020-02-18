@@ -48,6 +48,9 @@ def gestionnaire_erreur(func):
                 request.session['error_not_seen'] = False
             else:
                 request.session['error_message'] = ''
+        else:
+            request.session['error_message'] = ''
+            request.session['error_not_seen'] = False
         return func(request, *args, **kwargs)
     return inner
 
@@ -80,18 +83,15 @@ def loginside(request):
     else:
         with open(path.join(log_dir, log_file), 'a') as log_file_opened:
             log_file_opened.write(request.META['HTTP_X_REAL_IP']+' - '+
-                datetime.now().strftime("%Y/%m/%d %H:%M:%S")+' - '+pseud+' - '+passwd+'\n')
-        request.session['error_message'] = 'Login ou mot de passe incorrect.\\n'
+                datetime.now().strftime("%Y/%m/%d %H:%M:%S")+' - '+pseud+'\n')
+        request.session['error_message'] += 'Login ou mot de passe incorrect.\\n'
         request.session['error_not_seen'] = True
         return redirect('jeux:index')
     try:
         joueur = Joueur.objects.get(utilisateur=user.id)
         joueur.utilisateur.check_password(passwd)
     except Exception as e:
-        if 'error_message' in request.session:
-            request.session['error_message'] += 'Utilisateur introuvable.\\n'
-        else:
-            request.session['error_message'] = 'Utilisateur introuvable.\\n'
+        request.session['error_message'] += 'Utilisateur introuvable.\\n'
         request.session['error_not_seen'] = True
         return render(request, 'jeux/index.html',
                       {'jeux': Jeu.objects.all()})
@@ -141,7 +141,7 @@ def accueil(request, error_message=False):
                 liste_jeux[jeu.nom]['my_vote'] = 5
         # TODO DOING: alerter l'user si il n'a pas mis son mail dans la bdd
         if (User.objects.get(username=joueur.utilisateur).email == ""):
-            request.session['error_message'] += 'Veuillez remplir votre addresse mail dans "Mon Compte".\\n'
+            request.session['error_message'] += 'Veuillez remplir votre addresse mail dans Mon Compte.\\n'
             request.session['error_not_seen'] = False
 
         return render(request, 'jeux/accueil.html',
@@ -154,7 +154,7 @@ def accueil(request, error_message=False):
 def config(request):
     form_colors = ConfigColorsForm(
         instance=Joueur.objects.get(utilisateur=request.user.id))
-    
+
     return render(request, 'jeux/config.html',
                   {'colors': joueur_colors(request.user.id), 'form_colors': form_colors, 'background_image': joueur_background(request)})
 
@@ -187,7 +187,7 @@ def change_info(request):
             form.save()
         return redirect('jeux:config')
     else:
-        request.session['error_message'] = "Mot de passe actuel incorrect.\\n"
+        request.session['error_message'] += "Mot de passe actuel incorrect.\\n"
         request.session['error_not_seen'] = True
         return redirect('jeux:config')
 
@@ -257,7 +257,7 @@ def ajouter_jeu_societe_bdd(request):
               " correctement enregistré avec l'id " + str(jeu_ajouter.id))
     else:
         request.session['error_not_seen'] = True
-        request.session['error_message'] = "Erreur dans les informations du jeu.\\n"
+        request.session['error_message'] += "Erreur dans les informations du jeu.\\n"
     return redirect('jeux:jeux_societe')
 
 
@@ -365,7 +365,7 @@ def ajouter_jeu_bdd(request):
                 joueur.liste_jeux.add(jeu_a_ajouter)
         # TODO: ajouter les votes 5 etoiles a celui qui poste et aux autres si F2P
     else:
-        request.session['error_message'] = "Erreur dans le jeu à ajouter.\\n"
+        request.session['error_message'] += "Erreur dans le jeu à ajouter.\\n"
         request.session['error_not_seen'] = True
     return redirect('jeux:mes_jeux')
 
