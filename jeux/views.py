@@ -163,7 +163,7 @@ def config(request):
 def change_info(request):
     if request.user.check_password(request.POST.get('password')) and request.method == 'POST':
         if request.POST.get('password_new_1') != request.POST.get('password_new_1'):
-            request.session['error_message'] = "Les nouveaux mots de passe ne correspondent pas.\\n"
+            request.session['error_message'] += "Les nouveaux mots de passe ne correspondent pas.\\n"
             request.session['error_not_seen'] = True
             return redirect('jeux:config')
         elif not request.POST.get('password_new_1') == "":
@@ -185,6 +185,11 @@ def change_info(request):
             except Exception as e:
                 print("Error : " + str(e))
             form.save()
+        if request.POST.get('email') != "":
+            print('Changement de mail pour ' + request.user.username)
+            user_conncerne = User.objects.get(username=request.user.username)
+            user_conncerne.email = request.POST.get('email')
+            user_conncerne.save()
         return redirect('jeux:config')
     else:
         request.session['error_message'] += "Mot de passe actuel incorrect.\\n"
