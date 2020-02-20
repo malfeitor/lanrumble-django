@@ -1,6 +1,6 @@
 from django import forms
 # from django.contrib.auth.models import User
-from .models import Joueur, Jeu, Jeu_Societe
+from .models import Joueur, Jeu, Jeu_Societe, User
 
 
 class ConfigColorsForm(forms.ModelForm):
@@ -29,3 +29,9 @@ class ConfigColorsForm(forms.ModelForm):
             'color_body_background': 'Fond de la page',
             'background_file': "Fond d'écran",
         }
+
+
+class PasswordResetForm(forms.Form):
+    new_password_1 = forms.CharField(label="Entrez votre nouveau mot de passe :", widget=forms.PasswordInput())
+    new_password_2 = forms.CharField(label="Confirmez votre nouveau mot de passe :", widget=forms.PasswordInput())
+    token = forms.CharField(max_length=33)

@@ -59,3 +59,12 @@ class Vote_Jeu_Video(models.Model):
 
     def __str__(self):
         return self.joueur_concerne.utilisateur.username + " - " + self.jeu_concerne.nom + " = " + str(self.valeur)
+
+
+class TokenResetPassword(models.Model):
+    utilisateur_id = models.ForeignKey(User, blank=False, on_delete=models.CASCADE)
+    token = models.CharField(max_length=33, blank=False)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.utilisateur_id.username + " @ " + self.created.strftime("%d/%m/%Y %H:%M:%S") + " UTC"

@@ -21,6 +21,8 @@ urlpatterns = [
     path('ajax/vote_jeuvideo', views.ajax_vote_videogame, name="ajax_vote_videogame"),
     path('jeux_societe', views.jeux_societe, name="jeux_societe"),
     path('ajouter_jeu_societe_bdd', views.ajouter_jeu_societe_bdd, name="ajouter_jeu_societe_bdd"),
+    path('reset_password', views.reset_password, name="reset_password"),
+    path('reset_page', views.reset_page, name='reset_page'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if not settings.DEBUG:

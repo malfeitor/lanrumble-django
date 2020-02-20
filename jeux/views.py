@@ -4,13 +4,14 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout, password_validation
 # from django.core.files.storage import FileSystemStorage
 from django.utils.translation import gettext
+from django.utils import timezone
 from django.core.mail import send_mail
-from datetime import time, datetime
-from os import path, remove
 from django.conf import settings
-from .models import Jeu, Joueur, Jeu_Societe, Vote_Jeu_Video
-from .forms import ConfigColorsForm
-import re
+from .models import Jeu, Joueur, Jeu_Societe, Vote_Jeu_Video, TokenResetPassword
+from .forms import ConfigColorsForm, PasswordResetForm
+from os import path, remove
+from datetime import time, timedelta
+import re, secrets
 
 
 validate_mail_regexp = re.compile('^[0-9a-zA-Z.-_]{3,}@[0-9a-zA-Z-_]{2,}\.[a-zA-Z0-9]{2,}$')
@@ -89,7 +90,7 @@ def loginside(request):
     else:
         with open(path.join(log_dir, log_file), 'a') as log_file_opened:
             log_file_opened.write(request.META['HTTP_X_REAL_IP'] + ' - ' +
-                                  datetime.now().strftime("%Y/%m/%d %H:%M:%S") + ' - ' + pseud + '\n')
+                                  timezone.now().strftime("%Y/%m/%d %H:%M:%S +%Z") + ' - ' + pseud + '\n')
         request.session['error_message'] += 'Login ou mot de passe incorrect.\\n'
         request.session['error_not_seen'] = True
         return redirect('jeux:index')
@@ -207,8 +208,6 @@ def change_info(request):
                         not ('user_' + str(request.user.id) + '/') in str(form.cleaned_data['background_file'])):
                     remove(path.join(settings.MEDIA_ROOT, Joueur.objects.get(
                            utilisateur=request.user.id).background_file.name))
-                    # remove(path.join(settings.MEDIA_ROOT, Joueur.objects.get(
-                    #        utilisateur=request.user.id).background_file.name))
             except Exception as e:
                 print("Error : " + str(e))
             form.save()
@@ -220,12 +219,111 @@ def change_info(request):
         return redirect('jeux:config')
 
 
+def reset_password(request):
+    if request.method == 'POST':
+        if request.POST.get('email'):
+            print('Email : ' + request.POST.get('email'))
+            try:
+                user_concerned = User.objects.get(email=request.POST.get('email'))
+            except User.DoesNotExist:
+                return HttpResponse(200)
+        else:
+            print('Nom d\'utilisateur : ' + request.POST.get('username'))
+            try:
+                user_concerned = User.objects.get(username=request.POST.get('username'))
+            except User.DoesNotExist:
+                return HttpResponse(200)
+        print('Utilisateur trouvé.')
+        try:
+            dt = TokenResetPassword.objects.get(utilisateur_id=user_concerned)
+            if(timezone.now() - dt.created > timedelta(minutes=15)):
+                dt.delete()
+            else:
+                return HttpResponse(200)
+        except TokenResetPassword.DoesNotExist:
+            pass
+        token = secrets.token_urlsafe(32)
+        database_line = TokenResetPassword(utilisateur_id=user_concerned, token=token)
+        database_line.save()
+        message_txt = f"Salut {user_concerned.username}, \nVoici le lien de reset de ton mot de passe : \n\
+                        https://malfeitor.duckdns.org/reset_page?token={token}\nSi tu n'a pas demandé ce mail merci de me le faire savoir.\nDes bisous, l'équipe d'AQuoiQuonJoue."
+        message_html = f"<h2>Salut {user_concerned.username},</h2><a href='https://malfeitor.duckdns.org/reset_page?token={token}'>Voici le lien de reset de ton mot de passe</a>\
+                        Si tu n'a pas demandé ce mail merci de me le faire savoir.</br>Des bisous, l'équipe d'AQuoiQuonJoue."
+        send_mail('[AQuoiQuonJoue] Demande de réinitialisation de mot de passe.', message_txt,
+                  'aquoiquonjoue@malfeitor.duckdns.org', [user_concerned.email], html_message=message_html)
+        return HttpResponse(200)
+    return redirect('jeux:index')
+
+
+@gestionnaire_erreur
+def reset_page(request):
+    if request.method == 'GET':
+        password_validators = ''
+        for p in password_validation.password_validators_help_texts():
+            password_validators += gettext(p) + '\\n'
+        try:
+            token = request.GET.get('token', False)
+            token = TokenResetPassword.objects.get(token=token)
+            if(timezone.now() - token.created > timedelta(minutes=15)):
+                token.delete()
+                request.session['error_message'] += "Trop tard, token périmé, essaie encore.\\n"
+                request.session['error_not_seen'] = True
+                return redirect('jeux:index')
+            else:
+                form = PasswordResetForm()
+                return render(request, 'jeux/password_reset.html', {'form': form, 'password_validators': re.sub(r'\'', "\\'", password_validators),
+                                                                    'token': token.token})
+
+        except TokenResetPassword.DoesNotExist:
+            request.session['error_message'] += "Le token n'existe pas.\\n"
+            request.session['error_not_seen'] = True
+            return redirect('jeux:index')
+    elif request.method == 'POST':
+        password_validators = ''
+        for p in password_validation.password_validators_help_texts():
+            password_validators += gettext(p) + '\\n'
+        token_post = request.POST.get('token')
+        print(token_post)
+        pass_1 = request.POST.get('new_password_1')
+        pass_2 = request.POST.get('new_password_2')
+        if pass_1 != pass_2:
+            request.session['error_message'] += "Les mots de passe sont différents.\\n"
+            request.session['error_not_seen'] = True
+            form = PasswordResetForm()
+            return render(request, 'jeux/password_reset.html', {'form': form, 'password_validators': re.sub(r'\'', "\\'", password_validators),
+                                                                'token': token_post})
+        try:
+            if password_validation.validate_password(pass_1) is None:
+                try:
+                    token = TokenResetPassword.objects.get(token=token_post)
+                    if(timezone.now() - token.created > timedelta(minutes=15)):
+                        token.delete()
+                        return redirect('jeux:index')
+                    user = token.utilisateur_id
+                    user.set_password(pass_1)
+                    user.save()
+                    login(request, authenticate(
+                          request, username=token.utilisateur_id.username, password=pass_1))
+                    token.delete()
+                    print('Mdp de ' + user.username + ' changé.')
+                    request.session['error_message'] += "Mot de passe changé.\\n"
+                    request.session['error_not_seen'] = True
+                    return redirect('jeux:index')
+                except TokenResetPassword.DoesNotExist:
+                    return redirect('jeux:accueil')
+        except password_validation.ValidationError as e:
+            for message in e:
+                request.session['error_message'] += message + "\\n"
+            request.session['error_not_seen'] = True
+            form = PasswordResetForm()
+            return render(request, 'jeux/password_reset.html', {'form': form, 'password_validators': re.sub(r'\'', "\\'", password_validators),
+                                                                'token': token_post})
+    return render(request, 'jeux/index.html')
+
+
 @is_user_connected
 @gestionnaire_erreur
 def mes_amis(request):
-    send_mail('Subject here', 'plain ?', 'aquoiquonjoue@malfeitor.duckdns.org', ['request.user.email'],
-              html_message="<p>Here is the message.</p><pre>Test</pre>")
-    print("mail sent")
     return render(request, 'jeux/mes_amis.html',
                   {'colors': joueur_colors(request.user.id), 'background_image': joueur_background(request)})
 
@@ -416,19 +514,19 @@ def ajax_vote_videogame(request):
     return HttpResponse(200)
 
 
-def bad_request(request):
+def bad_request(request, exception):
     request.session['error_message'] = "Erreur 400.\\n"
     request.session['error_not_seen'] = True
     return redirect('jeux:index')
 
 
-def permission_denied(request):
+def permission_denied(request, exception):
     request.session['error_message'] = "Erreur 403.\\n"
     request.session['error_not_seen'] = True
     return redirect('jeux:index')
 
 
-def page_not_found(request):
+def page_not_found(request, exception):
     request.session['error_message'] = "Erreur 404.\\n"
     request.session['error_not_seen'] = True
     return redirect('jeux:index')
