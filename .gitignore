@@ -10,7 +10,6 @@ aquoiquonjoue_nginx_asgi.conf
 aquoiquonjoue_wsgi.ini
 
 jeux/__pycache__/*
-jeux/static/*
 jeux/media/*
 jeux/migrations/*
 
