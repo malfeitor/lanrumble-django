@@ -1,6 +1,7 @@
 jeux/__pycache__/*
 aquoiquonjoue/__pycache__/*
 aquoiquonjoue/settings.py
+aquoiquonjoue_asgi.sock.lock
 db.sqlite3
 aquoiquonjoue_nginx_uwsgi.conf
 aquoiquonjoue_nginx_asgi.conf
@@ -8,3 +9,5 @@ aquoiquonjoue_wsgi.ini
 uwsgi_params
 ca.crt
 ca.key
+jeux/static/*
+jeux/media/*

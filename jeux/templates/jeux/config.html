@@ -20,7 +20,7 @@
                     <br>
                     <input type="text" name="email" value="{{ request.user.email }}">
                     <br>
-                    <label for="password_new_1">Nouveau mot de passe :</label>
+                    <label for="password_new_1" id="password_validator">Nouveau mot de passe : <i class="far fa-question-circle"></i></label>
                     <br>
                     <input type="password" name="password_new_1">
                     <br>
@@ -55,6 +55,7 @@
             </div>
         </div>
     </form>
+    {{ password_validator }}
 </div>
 {% endblock content %}
 {% block script %}
@@ -64,6 +65,7 @@
             $("#link-config").addClass('active');
         }
     });
+    $('#password_validator').click(() => alert("{{ password_validators }}"));
 </script>
 {% endblock script %}
 {% block style %}

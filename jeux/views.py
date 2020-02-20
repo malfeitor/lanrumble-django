@@ -1,17 +1,22 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import QueryDict, HttpResponse
+from django.http import HttpResponse    # QueryDict,
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login, logout
-from django.core.files.storage import FileSystemStorage
+from django.contrib.auth import authenticate, login, logout, password_validation
+# from django.core.files.storage import FileSystemStorage
+from django.utils.translation import gettext
+from django.core.mail import send_mail
 from datetime import time, datetime
-from os import path
+from os import path, remove
 from django.conf import settings
 from .models import Jeu, Joueur, Jeu_Societe, Vote_Jeu_Video
 from .forms import ConfigColorsForm
+import re
 
 
+validate_mail_regexp = re.compile('^[0-9a-zA-Z.-_]{3,}@[0-9a-zA-Z-_]{2,}\.[a-zA-Z0-9]{2,}$')
 log_dir = '/var/log/nginx/'
 log_file = 'user_connections.log'
+
 
 def joueur_colors(joueur_id):
     """Fonction pour avoir la liste des couleurs de l'utilisateur logé"""
@@ -35,7 +40,7 @@ def joueur_background(request):
     try:
         background_image = Joueur.objects.get(
             utilisateur=request.user.id).background_file.url
-    except Exception as e:
+    except Exception:
         background_image = ""
     return background_image
 
@@ -64,6 +69,7 @@ def is_user_connected(func):
             return func(request, *args, **kwargs)
     return inner
 
+
 @gestionnaire_erreur
 def index(request):
     if request.user.is_authenticated:
@@ -82,15 +88,15 @@ def loginside(request):
         login(request, user)
     else:
         with open(path.join(log_dir, log_file), 'a') as log_file_opened:
-            log_file_opened.write(request.META['HTTP_X_REAL_IP']+' - '+
-                datetime.now().strftime("%Y/%m/%d %H:%M:%S")+' - '+pseud+'\n')
+            log_file_opened.write(request.META['HTTP_X_REAL_IP'] + ' - ' +
+                                  datetime.now().strftime("%Y/%m/%d %H:%M:%S") + ' - ' + pseud + '\n')
         request.session['error_message'] += 'Login ou mot de passe incorrect.\\n'
         request.session['error_not_seen'] = True
         return redirect('jeux:index')
     try:
         joueur = Joueur.objects.get(utilisateur=user.id)
         joueur.utilisateur.check_password(passwd)
-    except Exception as e:
+    except Exception:
         request.session['error_message'] += 'Utilisateur introuvable.\\n'
         request.session['error_not_seen'] = True
         return render(request, 'jeux/index.html',
@@ -106,12 +112,13 @@ def logoutside(request):
         logout(request)
     return redirect('jeux:index')
 
+
 @is_user_connected
 @gestionnaire_erreur
 def accueil(request, error_message=False):
     try:
         joueur = Joueur.objects.get(utilisateur=request.user.id)
-    except Exception as e:
+    except Exception:
         request.session['error_message'] += 'Utilisateur introuvable.\\n'
         request.session['error_not_seen'] = False
         return redirect('jeux:index')
@@ -123,7 +130,7 @@ def accueil(request, error_message=False):
             for jeu in ami.liste_jeux.all():
                 try:
                     vote = Vote_Jeu_Video.objects.filter(joueur_concerne=ami.id).filter(jeu_concerne=jeu.id).get().valeur
-                except Exception as e:
+                except Exception:
                     vote = 5
                 amis[ami.utilisateur.username].append([jeu.nom, vote])
 
@@ -137,7 +144,7 @@ def accueil(request, error_message=False):
             liste_jeux[jeu.nom]['joueurs_hot_seat'] = jeu.joueurs_max_hot_seat
             try:
                 liste_jeux[jeu.nom]['my_vote'] = Vote_Jeu_Video.objects.filter(joueur_concerne=joueur.id).filter(jeu_concerne=jeu.id).get().valeur
-            except Exception as e:
+            except Exception:
                 liste_jeux[jeu.nom]['my_vote'] = 5
         # TODO DOING: alerter l'user si il n'a pas mis son mail dans la bdd
         if (User.objects.get(username=joueur.utilisateur).email == ""):
@@ -154,42 +161,58 @@ def accueil(request, error_message=False):
 def config(request):
     form_colors = ConfigColorsForm(
         instance=Joueur.objects.get(utilisateur=request.user.id))
-
+    password_validators = ''
+    for p in password_validation.password_validators_help_texts():
+        password_validators += gettext(p) + '\\n'
     return render(request, 'jeux/config.html',
-                  {'colors': joueur_colors(request.user.id), 'form_colors': form_colors, 'background_image': joueur_background(request)})
+                  {'colors': joueur_colors(request.user.id), 'form_colors': form_colors, 'background_image': joueur_background(request),
+                   'password_validators': re.sub(r'\'', "\\'", password_validators)})
 
 
 @is_user_connected
+@gestionnaire_erreur
 def change_info(request):
     if request.user.check_password(request.POST.get('password')) and request.method == 'POST':
         if request.POST.get('password_new_1') != request.POST.get('password_new_1'):
             request.session['error_message'] += "Les nouveaux mots de passe ne correspondent pas.\\n"
             request.session['error_not_seen'] = True
-            return redirect('jeux:config')
-        elif not request.POST.get('password_new_1') == "":
+        elif not request.POST.get('password_new_1') == "" and password_validation.validate_password(request.POST.get('password')) is None:
             request.user.set_password(request.POST.get('password_new_1'))
             login(request, authenticate(
                 request, username=request.user.username, password=request.POST.get('password')))
             request.user.save()
+            request.session['error_message'] += "Mot de passe changé.\\n"
+            request.session['error_not_seen'] = True
             print("Mot de passe changé pour " + request.user.username)
+        elif request.POST.get('password_new_1') != "" and password_validation.validate_password(request.POST.get('password')) is not None:
+            request.session['error_message'] += "Nouveau mot de passe incorrect.\\n"
+            request.session['error_not_seen'] = True
+        if validate_mail_regexp.match(request.POST.get('email')) and request.POST.get('email') != request.user.email:
+            request.user.email = request.POST.get('email')
+            request.user.save()
+            request.session['error_message'] += "Addresse email changée.\\n"
+            request.session['error_not_seen'] = True
+            print('Changement de mail pour ' + request.user.username)
+        elif request.POST.get('email') != request.user.email:
+            request.session['error_message'] += "Addresse email incorrecte.\\n"
+            request.session['error_not_seen'] = True
+
         form = ConfigColorsForm(request.POST, request.FILES, instance=Joueur.objects.get(
             utilisateur=request.user.id))
         if form.is_valid():
             form.clean()
             # On supprimme le fond decran si upload d'un nouveau ou demande de le supprimmer !!
             try:
-                if (form.cleaned_data['background_file'] == False
-                        or not ('user_' + str(request.user.id) + '/') in str(form.cleaned_data['background_file'])):
-                    os.remove(os.path.join(settings.MEDIA_ROOT, Joueur.objects.get(
-                        utilisateur=request.user.id).background_file.name))
+                if (not form.cleaned_data['background_file'] or
+                        not ('user_' + str(request.user.id) + '/') in str(form.cleaned_data['background_file'])):
+                    remove(path.join(settings.MEDIA_ROOT, Joueur.objects.get(
+                           utilisateur=request.user.id).background_file.name))
+                    # remove(path.join(settings.MEDIA_ROOT, Joueur.objects.get(
+                    #        utilisateur=request.user.id).background_file.name))
             except Exception as e:
                 print("Error : " + str(e))
             form.save()
-        if request.POST.get('email') != "":
-            print('Changement de mail pour ' + request.user.username)
-            user_conncerne = User.objects.get(username=request.user.username)
-            user_conncerne.email = request.POST.get('email')
-            user_conncerne.save()
+
         return redirect('jeux:config')
     else:
         request.session['error_message'] += "Mot de passe actuel incorrect.\\n"
@@ -200,7 +223,9 @@ def change_info(request):
 @is_user_connected
 @gestionnaire_erreur
 def mes_amis(request):
-
+    send_mail('Subject here', 'plain ?', 'aquoiquonjoue@malfeitor.duckdns.org', ['request.user.email'],
+              html_message="<p>Here is the message.</p><pre>Test</pre>")
+    print("mail sent")
     return render(request, 'jeux/mes_amis.html',
                   {'colors': joueur_colors(request.user.id), 'background_image': joueur_background(request)})
 
@@ -224,7 +249,7 @@ def jeux_societe(request):
             if possesseur in liste_amis or possesseur.utilisateur.username == request.user.username:
                 liste_jeux[jeu.id]['possede_par'].append(
                     possesseur.utilisateur.username)
-                if not possesseur.utilisateur.username in liste_possesseurs_amis:
+                if possesseur.utilisateur.username not in liste_possesseurs_amis:
                     liste_possesseurs_amis.append(
                         possesseur.utilisateur.username)
         if len(liste_jeux[jeu.id]['possede_par']) == 0:
@@ -236,9 +261,9 @@ def jeux_societe(request):
 
 @is_user_connected
 def ajouter_jeu_societe_bdd(request):
-    if (int(request.POST.get('joueurs_min')) >= 1 and int(request.POST.get('joueurs_max')) >= 2
-        and len(request.POST.get('nom')) > 4 and len(request.POST.get('nom')) < 50
-            and (int(request.POST.get('temps_prevu_h')) >= 0 and int(request.POST.get('temps_prevu_min')) >= 0)):
+    if (int(request.POST.get('joueurs_min')) >= 1 and int(request.POST.get('joueurs_max')) >= 2 and
+        len(request.POST.get('nom')) > 4 and len(request.POST.get('nom')) < 50 and
+            (int(request.POST.get('temps_prevu_h')) >= 0 and int(request.POST.get('temps_prevu_min')) >= 0)):
         for jeu in Jeu_Societe.objects.all():
             if(jeu.nom.lower() == request.POST.get('nom').lower()):
                 print(jeu.nom + " existe déjà.")
@@ -337,8 +362,8 @@ def mes_jeux_enlever(request):
 @is_user_connected
 def ajouter_jeu_bdd(request):
     # Tests sur le jeu à ajouter dans la BDD
-    if ((int(request.POST.get('online')) > 0) and (int(request.POST.get('hot-seat')) > 0)
-            and request.POST.get('nom') != "Nom :"):
+    if ((int(request.POST.get('online')) > 0) and (int(request.POST.get('hot-seat')) > 0) and
+            request.POST.get('nom') != "Nom :"):
         for jeu in Jeu.objects.all():
             if(jeu.nom.lower() == request.POST.get('nom').lower()):
                 print(jeu.nom() + " déjà présent.")
@@ -377,7 +402,7 @@ def ajouter_jeu_bdd(request):
 
 @is_user_connected
 def ajax_vote_videogame(request):
-    vote_exists = False
+    # vote_exists = False
     vote_value = request.POST.get('vote')
     game = Jeu.objects.get(id=request.POST.get('jeu')[3:])
     player = Joueur.objects.get(utilisateur=request.user.id)
