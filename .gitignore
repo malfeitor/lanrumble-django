@@ -5,14 +5,14 @@ uwsgi_params
 
 *.sublime-*
 
-aquoiquonjoue/__pycache__/*
+__pycache__/*
+*/__pycache__/*
+*/*/__pycache__/*
+
 aquoiquonjoue_asgi.sock.lock
 aquoiquonjoue_nginx_uwsgi.conf
 aquoiquonjoue_nginx_asgi.conf
 aquoiquonjoue_wsgi.ini
 
-jeux/__pycache__/*
+jeux/media/*
 
-chat/__pycache__/*
-
-rectangle_game/__pycache__/*
