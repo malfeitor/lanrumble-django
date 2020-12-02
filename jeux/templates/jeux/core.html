@@ -42,6 +42,11 @@
                 <li class="nav-item">
                     <a class="nav-link" id="link-jeux" href="{% url 'jeux:mes_jeux' %}">Mes Jeux Vidéos</a>
                 </li>
+                {% if user.is_staff %}
+                <li class="nav-item">
+                    <a class="nav-link" id="link-jeux" href="#">TEST</a>
+                </li>
+                {% endif %}
             </ul>
             <div class="navbar-text" id="user_name">
                 {{ user.username }}&nbsp;&nbsp;

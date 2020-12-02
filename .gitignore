@@ -5,7 +5,9 @@ uwsgi_params
 
 *.sublime-*
 
+__pycache__
 __pycache__/
+
 
 aquoiquonjoue_asgi.sock.lock
 aquoiquonjoue_nginx_uwsgi.conf
