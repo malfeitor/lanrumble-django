@@ -44,7 +44,7 @@
                 </li>
                 {% if user.is_staff %}
                 <li class="nav-item">
-                    <a class="nav-link" id="link-jeux" href="#">TEST</a>
+                    <a class="nav-link" id="link-jeux" href="{% url 'admin:index' %}">Admin</a>
                 </li>
                 {% endif %}
             </ul>

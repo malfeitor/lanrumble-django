@@ -7,6 +7,7 @@ from django.utils.translation import gettext
 from django.utils import timezone
 from django.core.mail import send_mail
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from .models import Jeu, Joueur, Jeu_Societe, Vote_Jeu_Video, TokenResetPassword
 from .forms import ConfigColorsForm, PasswordResetForm
 from os import path, remove
@@ -61,16 +62,6 @@ def gestionnaire_erreur(func):
     return inner
 
 
-def is_user_connected(func):
-    """Décorateur pour vérifier si l'utilisateur est bien connecté"""
-    def inner(request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            return redirect('jeux:index')
-        else:
-            return func(request, *args, **kwargs)
-    return inner
-
-
 @gestionnaire_erreur
 def index(request):
     if request.user.is_authenticated:
@@ -114,7 +105,7 @@ def logoutside(request):
     return redirect('jeux:index')
 
 
-@is_user_connected
+@login_required(login_url='/')
 @gestionnaire_erreur
 def accueil(request, error_message=False):
     try:
@@ -157,7 +148,7 @@ def accueil(request, error_message=False):
                        'colors': joueur_colors(request.user.id), 'background_image': joueur_background(request)})
 
 
-@is_user_connected
+@login_required(login_url='/')
 @gestionnaire_erreur
 def config(request):
     form_colors = ConfigColorsForm(
@@ -170,7 +161,7 @@ def config(request):
                    'password_validators': re.sub(r'\'', "\\'", password_validators)})
 
 
-@is_user_connected
+
 @gestionnaire_erreur
 def change_info(request):
     if request.user.check_password(request.POST.get('password')) and request.method == 'POST':
@@ -321,14 +312,14 @@ def reset_page(request):
     return render(request, 'jeux/index.html')
 
 
-@is_user_connected
+@login_required(login_url='/')
 @gestionnaire_erreur
 def mes_amis(request):
     return render(request, 'jeux/mes_amis.html',
                   {'colors': joueur_colors(request.user.id), 'background_image': joueur_background(request)})
 
 
-@is_user_connected
+@login_required(login_url='/')
 @gestionnaire_erreur
 def jeux_societe(request):
     liste_jeux = {}
@@ -357,7 +348,7 @@ def jeux_societe(request):
                    'colors': joueur_colors(request.user.id), 'amis': liste_amis, 'background_image': joueur_background(request)})
 
 
-@is_user_connected
+@login_required(login_url='/')
 def ajouter_jeu_societe_bdd(request):
     if (int(request.POST.get('joueurs_min')) >= 1 and int(request.POST.get('joueurs_max')) >= 2 and
         len(request.POST.get('nom')) > 4 and len(request.POST.get('nom')) < 50 and
@@ -389,7 +380,7 @@ def ajouter_jeu_societe_bdd(request):
     return redirect('jeux:jeux_societe')
 
 
-@is_user_connected
+@login_required(login_url='/')
 @gestionnaire_erreur
 def mes_jeux(request):
     jeux_possedes = Joueur.objects.get(
@@ -414,7 +405,7 @@ def mes_jeux(request):
                    'colors': joueur_colors(request.user.id), 'background_image': joueur_background(request)})
 
 
-@is_user_connected
+@login_required(login_url='/')
 def mes_jeux_ajouter(request):
     joueur = Joueur.objects.get(utilisateur=request.user.id)
     for id_jeu in request.POST.getlist('jeu'):
@@ -434,7 +425,7 @@ def mes_jeux_ajouter(request):
     return redirect('jeux:mes_jeux')
 
 
-@is_user_connected
+@login_required(login_url='/')
 def mes_jeux_enlever(request):
     joueur = Joueur.objects.get(utilisateur=request.user.id)
     print(request.POST.getlist('jeu'))
@@ -457,7 +448,7 @@ def mes_jeux_enlever(request):
     return redirect('jeux:mes_jeux')
 
 
-@is_user_connected
+@login_required(login_url='/')
 def ajouter_jeu_bdd(request):
     # Tests sur le jeu à ajouter dans la BDD
     if ((int(request.POST.get('online')) > 0) and (int(request.POST.get('hot-seat')) > 0) and
@@ -498,7 +489,7 @@ def ajouter_jeu_bdd(request):
     return redirect('jeux:mes_jeux')
 
 
-@is_user_connected
+@login_required(login_url='/')
 def ajax_vote_videogame(request):
     # vote_exists = False
     vote_value = request.POST.get('vote')
