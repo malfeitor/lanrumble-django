@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from ..models import Joueur, Vote_Jeu_Video
-from .gestionnaire_erreur import *
-from .joueur_options import *
+from .gestionnaire_erreur import gestionnaire_erreur
+from .joueur_options import joueur_colors, joueur_background
 
 
 @login_required(login_url='/')

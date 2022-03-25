@@ -1,6 +1,12 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
+from django.utils import timezone
+from os import path
 from ..models import Jeu, Joueur
+
+
+log_dir = '/var/log/nginx/'
+log_file = 'user_connections.log'
 
 
 def loginside(request):

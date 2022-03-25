@@ -1,7 +1,3 @@
-from ..models import Jeu, Joueur, Jeu_Societe, Vote_Jeu_Video, TokenResetPassword
-from ..forms import ConfigColorsForm, PasswordResetForm
-
-
 def gestionnaire_erreur(func):
     """Fonction qui gère les erreurs"""
     def inner(request, *args, **kwargs):
