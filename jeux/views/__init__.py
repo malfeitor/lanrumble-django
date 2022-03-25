@@ -8,58 +8,21 @@ from django.utils import timezone
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from .models import Jeu, Joueur, Jeu_Societe, Vote_Jeu_Video, TokenResetPassword
-from .forms import ConfigColorsForm, PasswordResetForm
+from ..models import Jeu, Joueur, Jeu_Societe, Vote_Jeu_Video, TokenResetPassword
+from ..forms import ConfigColorsForm, PasswordResetForm
 from os import path, remove
 from datetime import time, timedelta
 import re, secrets
+
+from .joueur_options import *
+from .login_and_out import *
+from .accueil import *
+from .gestionnaire_erreur import *
 
 
 validate_mail_regexp = re.compile('^[0-9a-zA-Z.-_]{3,}@[0-9a-zA-Z-_]{2,}\.[a-zA-Z0-9]{2,}$')
 log_dir = '/var/log/nginx/'
 log_file = 'user_connections.log'
-
-
-def joueur_colors(joueur_id):
-    """Fonction pour avoir la liste des couleurs de l'utilisateur logé"""
-    try:
-        joueur = Joueur.objects.get(utilisateur=joueur_id)
-    except Exception as e:
-        print(e)
-    return {
-        'body_background': joueur.color_body_background,
-        'body_text': joueur.color_body_text,
-        'nav_background': joueur.color_nav_background,
-        'nav_link_active': joueur.color_nav_link_active,
-        'nav_link_hover': joueur.color_nav_link_hover,
-        'nav_link': joueur.color_nav_link,
-        'nav_text': joueur.color_nav_text
-    }
-
-
-def joueur_background(request):
-    """Fonction pour avoir le fond d'écran de l'utilisateur logé"""
-    try:
-        background_image = Joueur.objects.get(
-            utilisateur=request.user.id).background_file.url
-    except Exception:
-        background_image = ""
-    return background_image
-
-
-def gestionnaire_erreur(func):
-    """Fonction qui gère les erreurs"""
-    def inner(request, *args, **kwargs):
-        if 'error_not_seen' in request.session and 'error_message' in request.session:
-            if request.session['error_not_seen']:
-                request.session['error_not_seen'] = False
-            else:
-                request.session['error_message'] = ''
-        else:
-            request.session['error_message'] = ''
-            request.session['error_not_seen'] = False
-        return func(request, *args, **kwargs)
-    return inner
 
 
 @gestionnaire_erreur
@@ -69,84 +32,6 @@ def index(request):
     else:
         return render(request, 'jeux/index.html',
                       {'jeux': Jeu.objects.all()})
-
-
-def loginside(request):
-    """Vue de connection"""
-    pseud = request.POST.get('pseudo')
-    passwd = request.POST.get('password')
-    user = authenticate(request, username=pseud, password=passwd)
-    if user is not None:
-        login(request, user)
-    else:
-        with open(path.join(log_dir, log_file), 'a') as log_file_opened:
-            log_file_opened.write(request.META['HTTP_X_REAL_IP'] + ' - ' +
-                                  timezone.now().strftime("%Y/%m/%d %H:%M:%S +%Z") + ' - ' + pseud + '\n')
-        request.session['error_message'] += 'Login ou mot de passe incorrect.\\n'
-        request.session['error_not_seen'] = True
-        return redirect('jeux:index')
-    try:
-        joueur = Joueur.objects.get(utilisateur=user.id)
-        joueur.utilisateur.check_password(passwd)
-    except Exception:
-        request.session['error_message'] += 'Utilisateur introuvable.\\n'
-        request.session['error_not_seen'] = True
-        return render(request, 'jeux/index.html',
-                      {'jeux': Jeu.objects.all()})
-    else:
-        request.session['pseudo'] = joueur.utilisateur.username
-        return redirect('jeux:accueil')
-
-
-def logoutside(request):
-    if request.user.is_authenticated:
-        request.session.clear()
-        logout(request)
-    return redirect('jeux:index')
-
-
-@login_required(login_url='/')
-@gestionnaire_erreur
-def accueil(request, error_message=False):
-    try:
-        joueur = Joueur.objects.get(utilisateur=request.user.id)
-    except Exception:
-        request.session['error_message'] += 'Utilisateur introuvable.\\n'
-        request.session['error_not_seen'] = False
-        return redirect('jeux:index')
-    else:
-        amis = {}
-        liste_jeux = {}
-        for ami in joueur.amis.all():
-            amis[ami.utilisateur.username] = []
-            for jeu in ami.liste_jeux.all():
-                try:
-                    vote = Vote_Jeu_Video.objects.filter(joueur_concerne=ami.id).filter(jeu_concerne=jeu.id).get().valeur
-                except Exception:
-                    vote = 5
-                amis[ami.utilisateur.username].append([jeu.nom, vote])
-
-        for jeu in joueur.liste_jeux.all():
-            liste_jeux[jeu.nom] = {}
-            liste_jeux[jeu.nom]['id'] = jeu.id
-            liste_jeux[jeu.nom]['pvp'] = jeu.pvp
-            liste_jeux[jeu.nom]['coop'] = jeu.coop
-            liste_jeux[jeu.nom]['f2p'] = jeu.f2p
-            liste_jeux[jeu.nom]['joueurs_online'] = jeu.joueurs_max_online
-            liste_jeux[jeu.nom]['joueurs_hot_seat'] = jeu.joueurs_max_hot_seat
-            try:
-                liste_jeux[jeu.nom]['my_vote'] = Vote_Jeu_Video.objects.filter(joueur_concerne=joueur.id).filter(jeu_concerne=jeu.id).get().valeur
-            except Exception:
-                liste_jeux[jeu.nom]['my_vote'] = 5
-        # TODO DOING: alerter l'user si il n'a pas mis son mail dans la bdd
-        if (User.objects.get(username=joueur.utilisateur).email == ""):
-            request.session['error_message'] += 'Veuillez remplir votre addresse mail dans Mon Compte.\\n'
-            request.session['error_not_seen'] = False
-
-        return render(request, 'jeux/accueil.html',
-                      {'amis': amis, 'liste_jeux': liste_jeux,
-                       'colors': joueur_colors(request.user.id), 'background_image': joueur_background(request)})
-
 
 @login_required(login_url='/')
 @gestionnaire_erreur
@@ -159,7 +44,6 @@ def config(request):
     return render(request, 'jeux/config.html',
                   {'colors': joueur_colors(request.user.id), 'form_colors': form_colors, 'background_image': joueur_background(request),
                    'password_validators': re.sub(r'\'', "\\'", password_validators)})
-
 
 
 @gestionnaire_erreur
@@ -351,7 +235,7 @@ def jeux_societe(request):
 @login_required(login_url='/')
 def ajouter_jeu_societe_bdd(request):
     if (int(request.POST.get('joueurs_min')) >= 1 and int(request.POST.get('joueurs_max')) >= 2 and
-        len(request.POST.get('nom')) > 4 and len(request.POST.get('nom')) < 50 and
+        len(request.POST.get('nom')) >= 4 and len(request.POST.get('nom')) < 50 and
             (int(request.POST.get('temps_prevu_h')) >= 0 and int(request.POST.get('temps_prevu_min')) >= 0)):
         for jeu in Jeu_Societe.objects.all():
             if(jeu.nom.lower() == request.POST.get('nom').lower()):
