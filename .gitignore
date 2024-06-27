@@ -2,6 +2,7 @@ db.sqlite3
 ca.crt
 ca.key
 uwsgi_params
+.env
 
 *.sublime-*
 
