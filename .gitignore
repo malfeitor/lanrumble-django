@@ -16,4 +16,4 @@ aquoiquonjoue_nginx_asgi.conf
 aquoiquonjoue_wsgi.ini
 
 jeux/media/*
-
+/static
