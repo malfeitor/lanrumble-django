@@ -1,14 +1,9 @@
-from django.urls import path, include
-from rest_framework import routers
+from django.urls import path
 from django.conf.urls import handler400, handler403, handler404, handler500
 from django.conf.urls.static import static
 from django.conf import settings
 
 from . import views
-from .views.api import JeuxView
-
-router = routers.DefaultRouter()
-router.register(r"jeux", views.api.JeuxView, "jeu")
 
 app_name = "jeux"
 urlpatterns = [
@@ -32,7 +27,6 @@ urlpatterns = [
     ),
     path("reset_password", views.reset_password, name="reset_password"),
     path("reset_page", views.reset_page, name="reset_page"),
-    # path('api/', include(router.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if not settings.DEBUG:
