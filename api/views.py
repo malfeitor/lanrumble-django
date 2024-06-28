@@ -2,15 +2,18 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
-from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
+from rest_framework_simplejwt.backends import TokenBackend
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
 class HomeView(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
+        token = AccessToken(request.META.get("HTTP_AUTHORIZATION", " ").split(" ")[1])
         content = {
-            "message": "Welcome to the JWT Authentication page using React Js and Django!"
+            "message": f'Welcome {token["user_id"]} to the JWT Authentication page using React Js and Django!'
         }
         return Response(content)
 
