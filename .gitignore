@@ -3,12 +3,12 @@ ca.crt
 ca.key
 uwsgi_params
 .env
+.venv
 
-*.sublime-*
+**/__pycache__
+**/migrations
 
-__pycache__
-__pycache__/
-
+**/mysql.conf
 
 aquoiquonjoue_asgi.sock.lock
 aquoiquonjoue_nginx_uwsgi.conf
