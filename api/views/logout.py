@@ -3,17 +3,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
-
-
-class HomeView(APIView):
-    permission_classes = (IsAuthenticated,)
-
-    def get(self, request):
-        token = AccessToken(request.META.get("HTTP_AUTHORIZATION", " ").split(" ")[1])
-        content = {
-            "message": f'Welcome {token["user_id"]} to the JWT Authentication page using React Js and Django!'
-        }
-        return Response(content)
+from jeux.models import Joueur, Vote_Jeu_Video
 
 
 class LogoutView(APIView):
