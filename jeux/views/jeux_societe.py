@@ -9,7 +9,7 @@ from .joueur_options import joueur_colors, joueur_background
 @gestionnaire_erreur
 def jeux_societe(request):
     liste_jeux = {}
-    liste_amis = Joueur.objects.get(utilisateur=request.user.id).amis.all()
+    liste_amis = Joueur.objects.get(utilisateur=request.user.id).amis.exclude(utilisateur__groups__name="guest").all()
     liste_possesseurs_amis = []
     for jeu in Jeu_Societe.objects.all():
         liste_jeux[jeu.id] = {}

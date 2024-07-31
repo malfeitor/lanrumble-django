@@ -18,7 +18,7 @@ def accueil(request, error_message=False):
     else:
         amis = {}
         liste_jeux = {}
-        for ami in joueur.amis.all():
+        for ami in joueur.amis.exclude(utilisateur__groups__name="guest").all():
             amis[ami.utilisateur.username] = []
             for jeu in ami.liste_jeux.all():
                 try:
@@ -39,7 +39,7 @@ def accueil(request, error_message=False):
                 liste_jeux[jeu.nom]['my_vote'] = Vote_Jeu_Video.objects.filter(joueur_concerne=joueur.id).filter(jeu_concerne=jeu.id).get().valeur
             except Exception:
                 liste_jeux[jeu.nom]['my_vote'] = 5
-        # TODO DOING: alerter l'user si il n'a pas mis son mail dans la bdd
+
         if User.objects.get(username=joueur.utilisateur).email == "":
             request.session['error_message'] += 'Veuillez remplir votre addresse mail dans Mon Compte.\\n'
             request.session['error_not_seen'] = False
