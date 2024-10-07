@@ -18,7 +18,7 @@ daphne -u /tmp/aquoiquonjoue.sock -e ssl:8000:privateKey=ca.key:certKey=ca.crt a
 Note :
 redis server (pour les websockets) https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-redis-on-ubuntu-16-04
 
-pour mise a jour : 
+pour mise a jour :
 git stash
 git pull
 git stash pop
