@@ -87,15 +87,13 @@ WSGI_APPLICATION = "aquoiquonjoue.wsgi.application"
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-    },
-#    'mysql':{
-#         'ENGINE': 'django.db.backends.mysql',
-#         'OPTIONS': {
-#             'read_default_file': '/var/www/aquoiquonjoue/aquoiquonjoue/mysql.conf',
-#         },
-#    }
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME' : os.environ["MYSQL_DATABASE"],
+        'USER' : os.environ["MYSQL_USER"],
+        'PASSWORD' : os.environ["MYSQL_PASSWORD"],
+        'HOST' : os.environ["MYSQL_HOST"],
+        'PORT': '3306'
+   }
 }
 
 
