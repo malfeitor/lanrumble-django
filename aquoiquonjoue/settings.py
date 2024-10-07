@@ -34,7 +34,7 @@ ALLOWED_HOSTS = ["*"]
 
 # Application definition
 INSTALLED_APPS = [
-    "channels",
+    # "channels",
     "chat",
     "rectangle_game",
     "jeux.apps.JeuxConfig",
@@ -139,14 +139,14 @@ SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 SESSION_COOKIE_HTTPONLY = True
 
 ASGI_APPLICATION = "aquoiquonjoue.routing.application"
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],
-        },
-    }
-}
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [("127.0.0.1", 6379)],
+#         },
+#     }
+# }
 
 SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_HTTPONLY = True
