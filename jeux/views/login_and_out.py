@@ -18,7 +18,7 @@ def loginside(request):
         login(request, user)
     else:
         with open(path.join(log_dir, log_file), 'a') as log_file_opened:
-            log_file_opened.write(request.META['HTTP_X_REAL_IP'] + ' - ' +
+            log_file_opened.write(request.META.get('HTTP_X_REAL_IP','unknown') + ' - ' +
                                   timezone.now().strftime("%Y/%m/%d %H:%M:%S +%Z") + ' - ' + pseud + '\n')
         request.session['error_message'] += 'Login ou mot de passe incorrect.\\n'
         request.session['error_not_seen'] = True
