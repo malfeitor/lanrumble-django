@@ -1,33 +1,43 @@
+name: lanrumble
+
 services:
   back:
     build: .
-    command: daphne -e ssl:8000:privateKey=ca.key:certKey=ca.crt aquoiquonjoue.asgi:application
+    container_name: django
+    command: daphne -e ssl:8000:privateKey=/cert/ca.key:certKey=/cert/ca.crt aquoiquonjoue.asgi:application
     depends_on:
       - db
     ports:
       - 8000:8000
     volumes:
-      - /tmp/app/django_db_socket:/run/mysqld
+      - lanrumble_cert_volume:/cert/
+      - media:/app/jeux/media
+      - /tmp/app/django_db_socket:/run/postgresd
+      - logs:/var/log/nginx/
     environment:
       SECRET_KEY : ${SECRET_KEY}
       EMAIL_HOST_PASSWORD : ${EMAIL_HOST_PASSWORD}
       DEBUG : ${DEBUG}
-      MYSQL_DATABASE : ${MYSQL_DATABASE}
-      MYSQL_USER : ${MYSQL_USER}
-      MYSQL_PASSWORD : ${MYSQL_PASSWORD}
-      MYSQL_HOST : db
+      POSTGRES_DATABASE : ${POSTGRES_DATABASE}
+      POSTGRES_USER : ${POSTGRES_USER}
+      POSTGRES_PASSWORD : ${POSTGRES_PASSWORD}
+      POSTGRES_HOST : db
 
   db:
-    image: mysql:latest
+    image: postgres:latest
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD : ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE : ${MYSQL_DATABASE}
-      MYSQL_USER : ${MYSQL_USER}
-      MYSQL_PASSWORD : ${MYSQL_PASSWORD}
+      POSTGRES_ROOT_PASSWORD : ${POSTGRES_ROOT_PASSWORD}
+      POSTGRES_DATABASE : ${POSTGRES_DATABASE}
+      POSTGRES_USER : ${POSTGRES_USER}
+      POSTGRES_PASSWORD : ${POSTGRES_PASSWORD}
     volumes:
-      - /tmp/app/django_db_socket:/var/run/mysqld
-      - db_data:/var/lib/mysql
+      - /tmp/app/django_db_socket:/var/run/postgresd
+      - db_data:/var/lib/postgresql/data
 
 volumes:
   db_data: {}
+  lanrumble_cert_volume:
+    external: true
+  media: {}
+  logs: {}
