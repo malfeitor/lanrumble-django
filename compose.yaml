@@ -1,25 +1,27 @@
-name: lanrumble
-
 services:
   back:
     build: .
-    container_name: django
-    command: daphne -e ssl:8000:privateKey=/cert/ca.key:certKey=/cert/ca.crt aquoiquonjoue.asgi:application
+    image: armitage1/lanrumble-django
+    command: daphne -e ssl:8000:privateKey=ca.key:certKey=ca.crt lanrumble.asgi:application
     depends_on:
       - db
     ports:
       - 8000:8000
     volumes:
-      - lanrumble_cert_volume:/cert/
       - media:/app/jeux/media
       - /tmp/app/django_db_socket:/run/postgresd
       - logs:/var/log/nginx/
+    secrets:
+      - source: crt
+        target: /app/ca.crt
+      - source: key
+        target: /app/ca.key
     environment:
       SECRET_KEY : ${SECRET_KEY}
       EMAIL_HOST_PASSWORD : ${EMAIL_HOST_PASSWORD}
       DEBUG : ${DEBUG}
-      POSTGRES_DATABASE : ${POSTGRES_DATABASE}
-      POSTGRES_USER : ${POSTGRES_USER}
+      POSTGRES_DATABASE : django
+      POSTGRES_USER : django
       POSTGRES_PASSWORD : ${POSTGRES_PASSWORD}
       POSTGRES_HOST : db
 
@@ -28,8 +30,8 @@ services:
     restart: always
     environment:
       POSTGRES_ROOT_PASSWORD : ${POSTGRES_ROOT_PASSWORD}
-      POSTGRES_DATABASE : ${POSTGRES_DATABASE}
-      POSTGRES_USER : ${POSTGRES_USER}
+      POSTGRES_DATABASE : django
+      POSTGRES_USER : django
       POSTGRES_PASSWORD : ${POSTGRES_PASSWORD}
     volumes:
       - /tmp/app/django_db_socket:/var/run/postgresd
@@ -37,7 +39,15 @@ services:
 
 volumes:
   db_data: {}
-  lanrumble_cert_volume:
-    external: true
   media: {}
   logs: {}
+
+secrets:
+  crt:
+    file: ../ca.crt
+  key:
+    file: ../ca.key
+  django_secret:
+    environment: SECRET_KEY
+  email_host_password:
+    environment: EMAIL_HOST_PASSWORD
