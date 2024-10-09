@@ -179,7 +179,7 @@ EMAIL_HOST = "smtp.sendgrid.net"
 EMAIL_HOST_USER = "apikey"
 EMAIL_HOST_PASSWORD = os.environ["EMAIL_HOST_PASSWORD"]
 EMAIL_PORT = 587
-EMAIL_SUBJECT_PREFIX = "[Lanrumble] "
+EMAIL_SUBJECT_PREFIX = "[LANRumble] "
 EMAIL_USE_TLS = True
 
 CORS_ORIGIN_WHITELIST = ["http://localhost:3000"]
