@@ -2,6 +2,7 @@ services:
   back:
     build: .
     image: armitage1/lanrumble-django
+    restart: always
     command: daphne -e ssl:8000:privateKey=ca.key:certKey=ca.crt lanrumble.asgi:application
     depends_on:
       - db
@@ -10,7 +11,7 @@ services:
     volumes:
       - media:/app/jeux/media
       - /tmp/app/django_db_socket:/run/postgresd
-      - logs:/var/log/nginx/
+      - logs:/var/log/
     secrets:
       - source: crt
         target: /app/ca.crt
@@ -44,9 +45,9 @@ volumes:
 
 secrets:
   crt:
-    file: ../ca.crt
+    file: ./ca.crt
   key:
-    file: ../ca.key
+    file: ./ca.key
   django_secret:
     environment: SECRET_KEY
   email_host_password:
