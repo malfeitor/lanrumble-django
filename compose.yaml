@@ -12,6 +12,7 @@ services:
       - media:/app/jeux/media
       - /tmp/app/django_db_socket:/run/postgresd
       - logs:/var/log/
+      - .:/app
     secrets:
       - source: crt
         target: /app/ca.crt
