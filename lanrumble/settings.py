@@ -37,10 +37,10 @@ LOGGING = {
     'handlers': {
         'file': {
             'level': 'DEBUG',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': '/var/log/django/debug.log',
-            'maxBytes': 1024*1024*15, # 15MB
+            'class':'logging.handlers.RotatingFileHandler',
+            'maxBytes': 1024*10242*15, #15MB
             'backupCount': 10,
+            'filename': '/var/log/django-debug.log',
         },
     },
     'loggers': {
@@ -55,6 +55,7 @@ LOGGING = {
 # Application definition
 INSTALLED_APPS = [
     # "channels",
+    "daphne",
     "chat",
     "rectangle_game",
     "jeux.apps.JeuxConfig",
