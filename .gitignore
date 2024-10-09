@@ -10,10 +10,10 @@ uwsgi_params
 
 **/mysql.conf
 
-aquoiquonjoue_asgi.sock.lock
-aquoiquonjoue_nginx_uwsgi.conf
-aquoiquonjoue_nginx_asgi.conf
-aquoiquonjoue_wsgi.ini
+lanrumble_asgi.sock.lock
+lanrumble_nginx_uwsgi.conf
+lanrumble_nginx_asgi.conf
+lanrumble_wsgi.ini
 
 jeux/media/*
 /static
