@@ -115,11 +115,11 @@ def reset_password(request):
             database_line = TokenResetPassword(utilisateur_id=user_concerned, token=token)
             database_line.save()
             message_txt = f"Salut {user_concerned.username}, \nVoici le lien de reset de ton mot de passe : \n\
-                            https://malfeitor.duckdns.org/reset_page?token={token}\nSi tu n'a pas demandé ce mail merci de me le faire savoir.\nDes bisous, l'équipe d'AQuoiQuonJoue."
+                            https://malfeitor.duckdns.org/reset_page?token={token}\nSi tu n'a pas demandé ce mail merci de me le faire savoir.\nDes bisous, l'équipe d'Lanrumble."
             message_html = f"<h2>Salut {user_concerned.username},</h2></br><a href='https://malfeitor.duckdns.org/reset_page?token={token}'>Voici le lien de reset de ton mot de passe</a>\
-                            </br>Si tu n'a pas demandé ce mail merci de me le faire savoir.</br>Des bisous, l'équipe d'AQuoiQuonJoue."
-            send_mail('[AQuoiQuonJoue] Demande de réinitialisation de mot de passe.', message_txt,
-                    'aquoiquonjoue@malfeitor.duckdns.org', [user_concerned.email], html_message=message_html)
+                            </br>Si tu n'a pas demandé ce mail merci de me le faire savoir.</br>Des bisous, l'équipe d'Lanrumble."
+            send_mail('[Lanrumble] Demande de réinitialisation de mot de passe.', message_txt,
+                    'lanrumble@malfeitor.duckdns.org', [user_concerned.email], html_message=message_html)
             return HttpResponse(200)
     return redirect('jeux:index')
 

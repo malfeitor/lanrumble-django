@@ -4,4 +4,4 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 EXPOSE 8000
-CMD ["daphne", "-e", "ssl:8000:privateKey=ca.key:certKey=ca.crt", "aquoiquonjoue.asgi:application"]
+CMD ["daphne", "-e", "ssl:8000:privateKey=ca.key:certKey=ca.crt", "lanrumble.asgi:application"]

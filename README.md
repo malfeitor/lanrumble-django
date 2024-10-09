@@ -2,7 +2,7 @@ Install :
 python -m venv /path/to/new/venv
 . /path/to/new/venv/bin/activate
 pip install -r requirements.txt
-cp ./aquoiquonjoue_nginx_asgi.conf /etc/nginx/sites-availables
+cp ./lanrumble_nginx_asgi.conf /etc/nginx/sites-availables
 ln -s  /etc/nginx/sites-{availables,enabled}
 
 .env :
@@ -12,7 +12,7 @@ SECRET_KEY
 Run :
 service nginx start
 . /path/to/new/venv/bin/activate
-daphne -u /tmp/aquoiquonjoue.sock -e ssl:8000:privateKey=ca.key:certKey=ca.crt aquoiquonjoue.asgi:application
+daphne -u /tmp/lanrumble.sock -e ssl:8000:privateKey=ca.key:certKey=ca.crt lanrumble.asgi:application
 
 
 Note :
