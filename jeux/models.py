@@ -63,7 +63,7 @@ class Vote_Jeu_Video(models.Model):
 
 class TokenResetPassword(models.Model):
     utilisateur_id = models.ForeignKey(User, blank=False, on_delete=models.CASCADE)
-    token = models.CharField(max_length=33, blank=False)
+    token = models.CharField(max_length=100, blank=False)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
