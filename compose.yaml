@@ -10,7 +10,6 @@ services:
       - 8000:8000
     volumes:
       - media:/app/jeux/media
-      - /tmp/app/django_db_socket:/run/postgresd
       - logs:/var/log/
       - .:/app
     secrets:
@@ -36,7 +35,6 @@ services:
       POSTGRES_USER : django
       POSTGRES_PASSWORD : ${POSTGRES_PASSWORD}
     volumes:
-      - /tmp/app/django_db_socket:/var/run/postgresd
       - db_data:/var/lib/postgresql/data
 
 volumes:
