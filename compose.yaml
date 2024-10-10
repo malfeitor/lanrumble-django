@@ -27,7 +27,7 @@ services:
       POSTGRES_HOST : db
 
   db:
-    image: postgres:latest
+    image: postgres:17
     restart: always
     environment:
       POSTGRES_ROOT_PASSWORD : ${POSTGRES_ROOT_PASSWORD}
