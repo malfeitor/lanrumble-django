@@ -2,21 +2,31 @@
 {% block content %}
 <div class="container content_holder">
     <h1>Bienvenue sur : LANRumble</h1>
-    <div class="row justify-content-between">
-        <p>
+    <div class="row">
+        <div class="col justify-content-between">
             <h2>Liste des jeux dans la Base de données :</h2>
             <ul>
                 {% for jeu in jeux %}
                 <li>{{ jeu.nom }}</li>
                 {% endfor %}
             </ul>
-        </p>
-    </div>
-    <div>
-        <h3>Compte invité</h3>
-        <p>Utilisateur: test</br>Mot de passe: 9k6iedK1</p>
+        </div>
+        <div>
+            <h3>Compte invité</h3>
+            <p>Utilisateur: test</br>Mot de passe: 9k6iedK1</p>
+        </div>
     </div>
 {% endblock content %}
+{% block style %}
+<style>
+    nav {
+        img {
+            width: 38px;
+            height: 38px;
+        }
+    }
+</style>
+{% endblock style %}
 {% block script %}
 <script>
     function ordre_li(ou){
