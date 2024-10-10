@@ -3,7 +3,7 @@ services:
     build: .
     image: armitage1/lanrumble-django
     restart: always
-    command: daphne -e ssl:8000:privateKey=ca.key:certKey=ca.crt lanrumble.asgi:application
+    command: sleep infinity
     depends_on:
       - db
     ports:
