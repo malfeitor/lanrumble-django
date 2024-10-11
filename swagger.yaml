@@ -65,6 +65,30 @@ paths:
             $ref: '#/definitions/RefreshKO'
         '500':
           description: Internal Server Error
+  /logout/:
+    post:
+      tags:
+        - User Module
+      security:
+        - Bearer: []
+      summary: Logout
+      description: Delete user's tokens
+      parameters:
+        - in: body
+          name: body
+          description: Refresh Payload
+          required: true
+          schema:
+            $ref: '#/definitions/Logout'
+      produces:
+        - application/json
+      responses:
+        '205':
+          description: Logout Successfull
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
 
 securityDefinitions:
   Bearer:
@@ -106,6 +130,11 @@ definitions:
         properties:
           detail:
             type: string
+  Refresh:
+    type: object
+    properties:
+      refresh:
+        type: string
   RefreshKO:
     type: object
     properties:
@@ -120,3 +149,8 @@ definitions:
             type: string
           code:
             type: string
+  Logout:
+    type: object
+    properties:
+      refresh_token:
+        type: string
