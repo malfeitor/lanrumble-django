@@ -12,7 +12,7 @@ paths:
   /token/:
     post:
       tags:
-        - User Module
+        - Token management
       summary: Login
       description: API for Login
       parameters:
@@ -40,7 +40,7 @@ paths:
   /token/refresh/:
     post:
       tags:
-        - User Module
+        - Token management
       summary: Refresh
       description: API for Refresh token
       parameters:
@@ -68,7 +68,7 @@ paths:
   /logout/:
     post:
       tags:
-        - User Module
+        - Token management
       security:
         - Bearer: []
       summary: Logout
