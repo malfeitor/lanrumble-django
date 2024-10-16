@@ -40,7 +40,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Refresh'
+              properties:
+                refresh:
+                  type: string
       responses:
         '200':
           $ref: '#/components/responses/Tokens'
@@ -63,7 +65,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Logout'
+              properties:
+                refresh_token:
+                  type: string
       responses:
         '205':
           description: Logout Successfull
@@ -73,7 +77,7 @@ paths:
           $ref: '#/components/responses/401'
         '500':
           description: Internal server error
-  /video-game/{id}:
+  /videogame/{id}:
     get:
       tags:
         - Videogames
@@ -99,7 +103,7 @@ paths:
           description: Videogame not found
         '500':
           description: Internal server error
-  /video-game/{id}/title:
+  /videogame/{id}/title:
     get:
       tags:
         - Videogames
@@ -125,7 +129,7 @@ paths:
           description: Videogame not found
         '500':
           description: Internal server error
-  /video-games:
+  /videogames:
     get:
       tags:
         - Videogames
@@ -170,7 +174,7 @@ paths:
           $ref: '#/components/responses/401'
         '500':
           description: Internal server error
-  /user/{userId}/video-games:
+  /user/{user_id}/videogames:
     get:
       tags:
         - Videogames
@@ -180,7 +184,7 @@ paths:
         - Bearer: []
       parameters:
         - in: path
-          name: userId
+          name: user_id
           required: true
           description: Numeric ID of the user
           schema:
@@ -219,16 +223,6 @@ components:
         password:
           type: string
           description: user password
-    Refresh:
-      type: object
-      properties:
-        refresh:
-          type: string
-    Logout:
-      type: object
-      properties:
-        refresh_token:
-          type: string
     Friend:
       type: object
       properties:
