@@ -22,19 +22,11 @@ paths:
               $ref: '#/components/schemas/Login'
       responses:
         '200':
-          description: Login Successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/LoginOK'
+          $ref: '#/components/responses/Tokens'
         '400':
-          description: Invalid Fields
+          $ref: '#/components/responses/400'
         '401':
-          description: Login Failed
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/LoginKO'
+          $ref: '#/components/responses/401'
         '500':
           description: Internal Server Error
   /token/refresh/:
@@ -51,15 +43,11 @@ paths:
               $ref: '#/components/schemas/Refresh'
       responses:
         '200':
-          description: Refresh Successfull
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/LoginOK'
+          $ref: '#/components/responses/Tokens'
         '400':
-          description: Invalid Fields
+          $ref: '#/components/responses/400'
         '401':
-          description: Unauthorized
+          $ref: '#/components/responses/401'
         '500':
           description: Internal Server Error
   /logout/:
@@ -80,9 +68,9 @@ paths:
         '205':
           description: Logout Successfull
         '400':
-          description: Invalid Fields
+          $ref: '#/components/responses/400'
         '401':
-          description: Unauthorized
+          $ref: '#/components/responses/401'
         '500':
           description: Internal Server Error
   /all-video-games:
@@ -97,7 +85,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Game'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Game'
         '500':
           description: Internal server error
   /user/{userId}/friends:
@@ -121,16 +111,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Friend'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Friend'
         '401':
-          description: Unauthorized
+          $ref: '#/components/responses/401'
         '500':
           description: Internal server error
   /user/{userId}/video-games:
     get:
       tags:
         - Video Games
-      summary: User_Id's video games
+      summary: User Id's video games
       description: Show user number id video games
       security:
         - Bearer: []
@@ -147,12 +139,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Game'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Game'
         '401':
-          description: Unauthorized
+          $ref: '#/components/responses/401'
         '500':
           description: Internal server error
-
 
 components:
   securitySchemes:
@@ -160,6 +153,7 @@ components:
       type: apiKey
       name: Authorization
       in: header
+
   schemas:
     Login:
       properties:
@@ -169,51 +163,11 @@ components:
         password:
           type: string
           description: user password
-    LoginOK:
-      type: object
-      properties:
-        status:
-          type: integer
-        message:
-          type: string
-        body:
-          type: object
-          properties:
-            refresh:
-              type: string
-            access:
-              type: string
-    LoginKO:
-      type: object
-      properties:
-        status:
-          type: integer
-        message:
-          type: string
-        body:
-          type: object
-          properties:
-            detail:
-              type: string
     Refresh:
       type: object
       properties:
         refresh:
           type: string
-    RefreshKO:
-      type: object
-      properties:
-        status:
-          type: integer
-        message:
-          type: string
-        body:
-          type: object
-          properties:
-            detail:
-              type: string
-            code:
-              type: string
     Logout:
       type: object
       properties:
@@ -243,5 +197,52 @@ components:
           type: integer
         online:
           type: integer
-        user_rating:
-          type: integer
+
+  responses:
+    Tokens:
+      description: Login of refresh successfull
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              refresh:
+                type: string
+              access:
+                type: string
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              message:
+                type: string
+              body:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+    401:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+              code:
+                type: string
+    400:
+      description: Invalid Fields
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
