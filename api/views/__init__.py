@@ -1,2 +1,2 @@
-from .home import *
+from .videogames import *
 from .logout import *
