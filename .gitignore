@@ -4,6 +4,7 @@ ca.key
 uwsgi_params
 .env
 .venv
+.vscode
 
 **/__pycache__
 **/migrations
