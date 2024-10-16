@@ -72,13 +72,32 @@ paths:
         '401':
           $ref: '#/components/responses/401'
         '500':
-          description: Internal Server Error
-  /all-video-games:
+          description: Internal server error
+  /video-game/{id}:
+    get:
+      tags:
+        - Video Game
+      summary: Game data
+      description: Get game's info like name or player count, etc
+      security:
+        - Bearer: []
+      responses:
+        '200':
+          description: Game fetched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '404':
+          description: Game not found
+        '500':
+          description: Internal server error
+  /video-games:
     get:
       tags:
         - Video Games
       summary: All games
-      description: Show all games and ratings
+      description: Show all games
       responses:
         '200':
           description: Fetch successfull
@@ -87,7 +106,9 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Game'
+                  properties:
+                    title:
+                      type: string
         '500':
           description: Internal server error
   /user/{userId}/friends:
