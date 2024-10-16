@@ -76,8 +76,8 @@ paths:
   /video-game/{id}:
     get:
       tags:
-        - Video Games
-      summary: Game data
+        - Videogames
+      summary: Videogame data
       description: Get game's info like name or player count, etc
       security:
         - Bearer: []
@@ -87,23 +87,49 @@ paths:
           schema:
             type: integer
           required: true
-          description: Game's ID
+          description: Videogame's ID
       responses:
         '200':
-          description: Game fetched
+          description: Videogame fetched
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Game'
+                $ref: '#/components/schemas/Videogame'
         '404':
-          description: Game not found
+          description: Videogame not found
+        '500':
+          description: Internal server error
+  /video-game/{id}/title:
+    get:
+      tags:
+        - Videogames
+      summary: Videogame name
+      description: Get game's name
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Videogame's ID
+      responses:
+        '200':
+          description: Videogame fetched
+          content:
+            application/json:
+              schema:
+                type: string
+        '404':
+          description: Videogame not found
         '500':
           description: Internal server error
   /video-games:
     get:
       tags:
-        - Video Games
-      summary: All games
+        - Videogames
+      summary: All videogames
       description: Show all games
       responses:
         '200':
@@ -147,7 +173,7 @@ paths:
   /user/{userId}/video-games:
     get:
       tags:
-        - Video Games
+        - Videogames
       summary: User Id's video games
       description: Show user number id video games
       security:
@@ -210,7 +236,7 @@ components:
           type: integer
         name:
           type: string
-    Game:
+    Videogame:
       type: object
       properties:
         id:
