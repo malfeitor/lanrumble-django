@@ -76,7 +76,7 @@ paths:
   /video-game/{id}:
     get:
       tags:
-        - Video Game
+        - Video Games
       summary: Game data
       description: Get game's info like name or player count, etc
       security:
@@ -106,9 +106,7 @@ paths:
               schema:
                 type: array
                 items:
-                  properties:
-                    title:
-                      type: string
+                  type: string
         '500':
           description: Internal server error
   /user/{userId}/friends:
