@@ -81,6 +81,13 @@ paths:
       description: Get game's info like name or player count, etc
       security:
         - Bearer: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Game's ID
       responses:
         '200':
           description: Game fetched
@@ -160,7 +167,11 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Game'
+                  properties:
+                    id:
+                      type: integer
+                    title:
+                      type: string
         '401':
           $ref: '#/components/responses/401'
         '500':
