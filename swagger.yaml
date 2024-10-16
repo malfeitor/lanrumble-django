@@ -89,12 +89,69 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
+  /all_video_games:
+    get:
+      tags:
+        - Video Games
+      summary: All games
+      description: Show all games and ratings
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Fetch successfull
+          schema:
+            $ref: '#/definitions/AllGames'
+        '500':
+          description: Internal server error
+  /user_video_games:
+    get:
+      tags:
+        - Video Games
+      summary: All User Video Games
+      description: Show all user's video games
+      security:
+        - Bearer: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Fetch successfull
+          schema:
+            $ref: '#/definitions/AllUserGames'
+        '500':
+          description: Internal server error
+  /user/{userId}/video_games:
+    get:
+      tags:
+        - Video Games
+      summary: User_Id's video games
+      description: Show user number id video games
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: userId
+          type: integer
+          required: true
+          description: Numeric ID of the user to get the list of games
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Fetch successfull
+          schema:
+            $ref: '#/definitions/UserGames'
+        '500':
+          description: Internal server error
+
 
 securityDefinitions:
   Bearer:
     type: apiKey
     name: Authorization
     in: header
+
 definitions:
   Login:
     properties:
@@ -154,3 +211,44 @@ definitions:
     properties:
       refresh_token:
         type: string
+  AllGames:
+    type: array
+    items:
+      type: object
+      properties:
+        title:
+          type: string
+        rating:
+          type: string
+  AllUserGames:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        pvp:
+          type: boolean
+        coop:
+          type: boolean
+        free:
+          type: boolean
+        hotseat:
+          type: integer
+        online:
+          type: integer
+        user_rating:
+          type: integer
+  UserGames:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        rating:
+          type: integer
