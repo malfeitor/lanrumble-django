@@ -9,7 +9,6 @@ class VideogameView(APIView):
     def get(self, request, id):
         try:
             game = Jeu.objects.get(pk=id)
-            print(game.nom)
         except ObjectDoesNotExist:
             raise Http404
         return Response(game.nom)
