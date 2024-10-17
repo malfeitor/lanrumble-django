@@ -38,6 +38,7 @@ class TestSetupLoged(APITestCase):
         )
         self.accessToken = request.data["access"]
         self.refreshToken = request.data["refresh"]
+        self.client.credentials(HTTP_AUTHORIZATION="Bearer " + self.accessToken)
 
         return super().setUp()
 
