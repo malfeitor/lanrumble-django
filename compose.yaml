@@ -3,11 +3,12 @@ services:
     build: .
     image: armitage1/lanrumble-django
     restart: always
-    command: sleep infinity
+    command: ["sh", "-c", "pip install debugpy -t /tmp && python /tmp/debugpy --listen 0.0.0.0:3000 --wait-for-client -m daphne -e ssl:8000:privateKey=ca.key:certKey=ca.crt lanrumble.asgi:application"]
     depends_on:
       - db
     ports:
       - 8000:8000
+      - 3000:3000
     volumes:
       - media:/app/jeux/media
       - logs:/var/log/
