@@ -9,9 +9,7 @@ from .joueur_options import joueur_colors, joueur_background
 @login_required(login_url="/")
 @gestionnaire_erreur
 def mes_jeux(request):
-    jeux_possedes = Player.objects.get(
-        utilisateur=request.user.id
-    ).videogames_list.all()
+    jeux_possedes = Player.objects.get(user=request.user.id).videogames_list.all()
 
     jeux_bdd = list(Videogame.objects.all())
     temp = []
@@ -27,9 +25,7 @@ def mes_jeux(request):
     for jeu in temp:
         jeux_bdd.append(Videogame.objects.get(title=jeu))
     votes = list(
-        VideogameRating.objects.filter(
-            player=Player.objects.get(utilisateur=request.user.id)
-        )
+        VideogameRating.objects.filter(player=Player.objects.get(user=request.user.id))
     )
     return render(
         request,
@@ -46,7 +42,7 @@ def mes_jeux(request):
 
 @login_required(login_url="/")
 def mes_jeux_ajouter(request):
-    joueur = Player.objects.get(utilisateur=request.user.id)
+    joueur = Player.objects.get(user=request.user.id)
     for id_jeu in request.POST.getlist("jeu"):
         joueur_la_pas = True
         for jeu in joueur.videogames_list.all():
@@ -58,7 +54,7 @@ def mes_jeux_ajouter(request):
             except Exception as e:
                 print(
                     "Erreur ajouter jeu liste de : "
-                    + joueur.utilisateur.username
+                    + joueur.user.username
                     + "\\nJeu id = "
                     + id_jeu
                     + "\\n"
@@ -75,7 +71,7 @@ def mes_jeux_ajouter(request):
 
 @login_required(login_url="/")
 def mes_jeux_enlever(request):
-    joueur = Player.objects.get(utilisateur=request.user.id)
+    joueur = Player.objects.get(user=request.user.id)
     print(request.POST.getlist("jeu"))
     for id_jeu in request.POST.getlist("jeu"):
         if not get_object_or_404(Videogame, pk=id_jeu).f2p:
@@ -89,7 +85,7 @@ def mes_jeux_enlever(request):
                 except Exception as e:
                     print(
                         "Erreur enlever jeu liste de : "
-                        + joueur.utilisateur.username
+                        + joueur.user.username
                         + "\\nJeu id = "
                         + id_jeu
                         + "\\n"
@@ -110,10 +106,10 @@ def ajax_vote_videogame(request):
     # vote_exists = False
     vote_value = request.POST.get("vote")
     game = Videogame.objects.get(id=request.POST.get("jeu")[3:])
-    player = Player.objects.get(utilisateur=request.user.id)
-    vote = VideogameRating.objects.filter(jeu_concerne=game).filter(player=player)
+    player = Player.objects.get(user=request.user.id)
+    vote = VideogameRating.objects.filter(videogame=game).filter(player=player)
     if len(vote) == 0:
-        vote = VideogameRating(valeur=vote_value, jeu_concerne=game, player=player)
+        vote = VideogameRating(valeur=vote_value, videogame=game, player=player)
         vote.save()
     else:
         vote[0].rating = vote_value

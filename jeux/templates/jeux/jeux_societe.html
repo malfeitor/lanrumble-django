@@ -79,7 +79,7 @@
                         <label for="joueurs_max"><i class="fas fa-users"></i> Possesseurs :</label><br>
                         <select multiple name="possesseurs" class="form-control form-control-sm" id="liste_possesseurs_ajouter">
                             {% for ami in amis %}
-                            <option value="{{ ami.utilisateur.username }}">{{ ami.utilisateur.username }}</option>
+                            <option value="{{ ami.user.username }}">{{ ami.user.username }}</option>
                             {% endfor %}
                         </select><br>
                     </div>

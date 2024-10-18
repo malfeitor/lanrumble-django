@@ -4,7 +4,7 @@ from ..models import Player
 def joueur_colors(joueur_id):
     """Fonction pour avoir la liste des couleurs de l'utilisateur logé"""
     try:
-        joueur = Player.objects.get(utilisateur=joueur_id)
+        joueur = Player.objects.get(user=joueur_id)
     except Exception as e:
         print(e)
     return {
@@ -21,9 +21,7 @@ def joueur_colors(joueur_id):
 def joueur_background(request):
     """Fonction pour avoir le fond d'écran de l'utilisateur logé"""
     try:
-        background_image = Player.objects.get(
-            utilisateur=request.user.id
-        ).background_file.url
+        background_image = Player.objects.get(user=request.user.id).background_file.url
     except Exception:
         background_image = ""
     return background_image

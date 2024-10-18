@@ -10,8 +10,8 @@ from .joueur_options import joueur_colors, joueur_background
 def jeux_societe(request):
     liste_jeux = {}
     liste_amis = (
-        Player.objects.get(utilisateur=request.user.id)
-        .friends.exclude(utilisateur__groups__name="guest")
+        Player.objects.get(user=request.user.id)
+        .friends.exclude(user__groups__name="guest")
         .all()
     )
     liste_possesseurs_amis = []
@@ -26,13 +26,11 @@ def jeux_societe(request):
         for possesseur in jeu.owned_by.all():
             if (
                 possesseur in liste_amis
-                or possesseur.utilisateur.username == request.user.username
+                or possesseur.user.username == request.user.username
             ):
-                liste_jeux[jeu.id]["possede_par"].append(
-                    possesseur.utilisateur.username
-                )
-                if possesseur.utilisateur.username not in liste_possesseurs_amis:
-                    liste_possesseurs_amis.append(possesseur.utilisateur.username)
+                liste_jeux[jeu.id]["possede_par"].append(possesseur.user.username)
+                if possesseur.user.username not in liste_possesseurs_amis:
+                    liste_possesseurs_amis.append(possesseur.user.username)
         if len(liste_jeux[jeu.id]["possede_par"]) == 0:
             liste_jeux.pop(jeu.id, None)
     return render(

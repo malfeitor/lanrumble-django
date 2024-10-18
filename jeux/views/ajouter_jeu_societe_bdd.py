@@ -48,7 +48,7 @@ def ajouter_jeu_societe_bdd(request):
             )
             for pseudo in request.POST.getlist("possesseurs"):
                 jeu_ajouter.owned_by.add(
-                    Player.objects.get(utilisateur=User.objects.get(username=pseudo))
+                    Player.objects.get(user=User.objects.get(username=pseudo))
                 )
             jeu_ajouter.save()
             print(

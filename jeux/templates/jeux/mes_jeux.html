@@ -114,7 +114,7 @@
 </div>
 <div id="votes" hidden="true">
     {% for vote in votes %}
-    {{ vote.jeu_concerne.id }}/{{ vote.valeur }}*<br/>
+    {{ vote.videogame.id }}/{{ vote.rating }}*<br/>
     {% endfor %}
 </div>
 {% endblock content %}

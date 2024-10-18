@@ -27,9 +27,7 @@ validate_mail_regexp = re.compile(
 @login_required(login_url="/")
 @gestionnaire_erreur
 def config(request):
-    form_colors = ConfigColorsForm(
-        instance=Player.objects.get(utilisateur=request.user.id)
-    )
+    form_colors = ConfigColorsForm(instance=Player.objects.get(user=request.user.id))
     password_validators = ""
     for p in password_validation.password_validators_help_texts():
         password_validators += gettext(p) + "\\n"
@@ -103,7 +101,7 @@ def change_info(request):
             form = ConfigColorsForm(
                 request.POST,
                 request.FILES,
-                instance=Player.objects.get(utilisateur=request.user.id),
+                instance=Player.objects.get(user=request.user.id),
             )
             if form.is_valid():
                 form.clean()
@@ -116,7 +114,7 @@ def change_info(request):
                             path.join(
                                 settings.MEDIA_ROOT,
                                 Player.objects.get(
-                                    utilisateur=request.user.id
+                                    user=request.user.id
                                 ).background_file.name,
                             )
                         )

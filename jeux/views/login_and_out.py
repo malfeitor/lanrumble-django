@@ -30,14 +30,14 @@ def loginside(request):
         request.session["error_not_seen"] = True
         return redirect("jeux:index")
     try:
-        joueur = Player.objects.get(utilisateur=user.id)
-        joueur.utilisateur.check_password(passwd)
+        joueur = Player.objects.get(user=user.id)
+        joueur.user.check_password(passwd)
     except Exception:
         request.session["error_message"] += "Utilisateur introuvable.\\n"
         request.session["error_not_seen"] = True
         return render(request, "jeux/index.html", {"jeux": Videogame.objects.all()})
     else:
-        request.session["pseudo"] = joueur.utilisateur.username
+        request.session["pseudo"] = joueur.user.username
         return redirect("jeux:accueil")
 
 

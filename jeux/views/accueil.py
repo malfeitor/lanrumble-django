@@ -10,7 +10,7 @@ from .joueur_options import joueur_colors, joueur_background
 @gestionnaire_erreur
 def accueil(request, error_message=False):
     try:
-        joueur = Player.objects.get(utilisateur=request.user.id)
+        joueur = Player.objects.get(user=request.user.id)
     except Exception:
         request.session["error_message"] += "Utilisateur introuvable.\\n"
         request.session["error_not_seen"] = False
@@ -18,8 +18,8 @@ def accueil(request, error_message=False):
     else:
         amis = {}
         liste_jeux = {}
-        for ami in joueur.friends.exclude(utilisateur__groups__name="guest").all():
-            amis[ami.utilisateur.username] = []
+        for ami in joueur.friends.exclude(user__groups__name="guest").all():
+            amis[ami.user.username] = []
             for jeu in ami.videogames_list.all():
                 try:
                     vote = (
@@ -30,7 +30,7 @@ def accueil(request, error_message=False):
                     )
                 except Exception:
                     vote = 5
-                amis[ami.utilisateur.username].append([jeu.title, vote])
+                amis[ami.user.username].append([jeu.title, vote])
 
         for jeu in joueur.videogames_list.all():
             liste_jeux[jeu.title] = {}
@@ -50,7 +50,7 @@ def accueil(request, error_message=False):
             except Exception:
                 liste_jeux[jeu.title]["my_vote"] = 5
 
-        if User.objects.get(username=joueur.utilisateur).email == "":
+        if User.objects.get(username=joueur.user).email == "":
             request.session[
                 "error_message"
             ] += "Veuillez remplir votre addresse mail dans Mon Compte.\\n"
