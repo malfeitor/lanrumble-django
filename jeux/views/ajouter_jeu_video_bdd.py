@@ -48,7 +48,6 @@ def ajouter_jeu_bdd(request):
             if jeu_a_ajouter.f2p:
                 for joueur in Player.objects.all():
                     joueur.videogames_list.add(jeu_a_ajouter)
-            # TODO: ajouter les votes 5 etoiles a celui qui poste et aux autres si F2P
         else:
             request.session["error_message"] += "Erreur dans le jeu à ajouter.\\n"
             request.session["error_not_seen"] = True

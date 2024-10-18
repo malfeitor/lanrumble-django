@@ -1,13 +1,10 @@
 from django import forms
-
-# from django.contrib.auth.models import User
-from .models import Player, Videogame, Boardgame, User
+from .models import Player
 
 
 class ConfigColorsForm(forms.ModelForm):
     class Meta:
         model = Player
-        exclude = ["utilisateur_id"]
         fields = [
             "color_body_background",
             "color_body_text",

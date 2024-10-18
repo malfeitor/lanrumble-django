@@ -2,8 +2,6 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse  # QueryDict,
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, password_validation
-
-# from django.core.files.storage import FileSystemStorage
 from django.utils.translation import gettext
 from django.utils import timezone
 from django.core.mail import send_mail

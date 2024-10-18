@@ -31,26 +31,26 @@
                 <h3>Vos jeux : <input type="search" id="chercher_amis" name="chercher_amis" placeholder="Chercher un jeu..."></h3>
                 <table style="width:100%;">
                     <tr class="tete">
-                        <th class="selectable"><input type="checkbox" checked></th>
-                        <th class="nom">Nom</th>
-                        <th class="pvp"><i class="fas fa-users"></i> PvP</th>
-                        <th class="coop"><i class="fas fa-hands-helping"></i> Coop</th>
-                        <th class="f2p"><i class="fas fa-hand-holding-usd"></i> Free</th>
-                        <th class="hot_seat"><input type="checkbox" id="hot_seat_enabled">&nbsp
+                        <th class="selectable" scope="col"><input type="checkbox" checked></th>
+                        <th class="nom" scope="col">Nom</th>
+                        <th class="pvp" scope="col"><i class="fas fa-users"></i> PvP</th>
+                        <th class="coop" scope="col"><i class="fas fa-hands-helping"></i> Coop</th>
+                        <th class="f2p" scope="col"><i class="fas fa-hand-holding-usd"></i> Free</th>
+                        <th class="hot_seat" scope="col"><input type="checkbox" id="hot_seat_enabled">&nbsp
                             <i class="fas fa-chair"></i> Hot Seat</th>
-                        <th class="online"><i class="fas fa-globe-africa"></i> Online</th>
-                        <th class="votes"><i class="fas fa-star"></i> Votes</th>
+                        <th class="online" scope="col"><i class="fas fa-globe-africa"></i> Online</th>
+                        <th class="votes" scope="col"><i class="fas fa-star"></i> Votes</th>
                     </tr>
                     {% for nom, jeu in liste_jeux.items %}
                     <tr class="jeu" id="{{ jeu.id }}">
-                        <th class="selectable"><input type="checkbox" checked></th>
-                        <th class="nom">{{ nom }}</th>
-                        <th class="pvp">{{ jeu.pvp }}</th>
-                        <th class="coop">{{ jeu.coop }}</th>
-                        <th class="f2p">{{ jeu.f2p }}</th>
-                        <th class="hot_seat">{{ jeu.joueurs_hot_seat }}</th>
-                        <th class="online">{{ jeu.joueurs_online }}</th>
-                        <th class="votes">{{ jeu.my_vote }}</th>
+                        <th class="selectable" scope="col"><input type="checkbox" checked></th>
+                        <th class="nom" scope="col">{{ nom }}</th>
+                        <th class="pvp" scope="col">{{ jeu.pvp }}</th>
+                        <th class="coop" scope="col">{{ jeu.coop }}</th>
+                        <th class="f2p" scope="col">{{ jeu.f2p }}</th>
+                        <th class="hot_seat" scope="col">{{ jeu.joueurs_hot_seat }}</th>
+                        <th class="online" scope="col">{{ jeu.joueurs_online }}</th>
+                        <th class="votes" scope="col">{{ jeu.my_vote }}</th>
                     </tr>
                     {% endfor %}
                 </table>

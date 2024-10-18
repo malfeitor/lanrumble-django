@@ -26,19 +26,19 @@
                 <h3>Jeux disponibles pour <input type="number" step="1" id="joueurs_presents" style="width: 70px;" value="1"> :</h3>
                 <table>
                     <tr class="tete">
-                        <th class="nom">Nom</th>
-                        <th class="temps"><i class="fas fa-stopwatch"></i> Temps prévu</th>
-                        <th class="complexite"><i class="fas fa-brain"></i> Complexité</th>
-                        <th class="joueurs_min"><i class="fas fa-user"></i> Joueurs min.</th>
-                        <th class="joueurs_max"><i class="fas fa-users"></i> Joueurs max.</th>
+                        <th class="nom" scope="col">Nom</th>
+                        <th class="temps" scope="col"><i class="fas fa-stopwatch"></i> Temps prévu</th>
+                        <th class="complexite" scope="col"><i class="fas fa-brain"></i> Complexité</th>
+                        <th class="joueurs_min" scope="col"><i class="fas fa-user"></i> Joueurs min.</th>
+                        <th class="joueurs_max" scope="col"><i class="fas fa-users"></i> Joueurs max.</th>
                     </tr>
                     {% for id, info in jeux.items %}
                     <tr id="{{ id }}" class="jeu">
-                        <th class="nom">{{ info.nom }}</th>
-                        <th class="temps">{{ info.temps_prevu }}</th>
-                        <th class="complexite">{{ info.complexite }}</th>
-                        <th class="joueurs_min">{{ info.joueurs_min }}</th>
-                        <th class="joueurs_max">{{ info.joueurs_max }}</th>
+                        <th class="nom" scope="col">{{ info.nom }}</th>
+                        <th class="temps" scope="col">{{ info.temps_prevu }}</th>
+                        <th class="complexite" scope="col">{{ info.complexite }}</th>
+                        <th class="joueurs_min" scope="col">{{ info.joueurs_min }}</th>
+                        <th class="joueurs_max" scope="col">{{ info.joueurs_max }}</th>
                     </tr>
                     {% endfor %}
                 </table>

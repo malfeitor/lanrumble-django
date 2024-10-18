@@ -11,7 +11,7 @@ class Command(BaseCommand):
         parser.add_argument("Args", nargs="+", type=int)
 
     def handle(self, *args, **options):
-        if not "ajout_f2p" in options["Args"] and not "set_vote_5" in options["Args"]:
+        if "ajout_f2p" not in options["Args"] and "set_vote_5" not in options["Args"]:
             print(
                 "Usage : \najout_f2p   -> give F2P games to all users.\nset_vote_5  -> set ALL votes to 5 !"
             )
@@ -21,7 +21,7 @@ class Command(BaseCommand):
         if "ajout_f2p" in options["Args"]:
             for i in joueurs_presents:
                 for j in jeux_presents:
-                    if not j in i.videogames_list.all():
+                    if j not in i.videogames_list.all():
                         i.videogames_list.add(j)
                         i.save()
         if "set_vote_5" in options["Args"]:
