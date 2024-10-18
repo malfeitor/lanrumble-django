@@ -20,7 +20,7 @@ def user_directory_path(instance, filename):
 
 
 class Player(models.Model):
-    utilisateur = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     friends = models.ManyToManyField("self", blank=True)
     videogames_list = models.ManyToManyField(Videogame, blank=True)
     color_body_background = models.CharField(max_length=7, default="#222222")
@@ -36,7 +36,7 @@ class Player(models.Model):
     delete_files = models.Manager()
 
     def __str__(self):
-        return self.utilisateur.username
+        return self.user.username
 
 
 class Boardgame(models.Model):
@@ -68,7 +68,7 @@ class VideogameRating(models.Model):
 
     def __str__(self):
         return (
-            self.player.utilisateur.username
+            self.player.user.username
             + " - "
             + self.videogame.title
             + " = "
