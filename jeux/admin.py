@@ -1,18 +1,24 @@
 from django.contrib import admin
-from .models import Jeu, Joueur, Jeu_Societe, Vote_Jeu_Video, TokenResetPassword
+from .models import Videogame, Player, Boardgame, VideogameRating, TokenResetPassword
 
 
-class Jeu_SocieteAdmin(admin.ModelAdmin):
-    list_display = ("nom", "temps_prevu", "joueurs_min", "joueurs_max")
+class VideogameAdmin(admin.ModelAdmin):
+    list_display = (
+        "title",
+        "coop",
+        "pvp",
+        "f2p",
+        "max_online_players",
+        "max_hot_seat_players",
+    )
 
 
-class JeuAdmin(admin.ModelAdmin):
-    list_display = ("nom", "coop", "pvp", "f2p", "joueurs_max_online",
-                    "joueurs_max_hot_seat")
+class BoardgameAdmin(admin.ModelAdmin):
+    list_display = ("title", "game_time", "min_players", "max_players")
 
 
-admin.site.register(Jeu, JeuAdmin)
-admin.site.register(Joueur)
-admin.site.register(Jeu_Societe, Jeu_SocieteAdmin)
-admin.site.register(Vote_Jeu_Video)
+admin.site.register(Videogame, VideogameAdmin)
+admin.site.register(Player)
+admin.site.register(Boardgame, BoardgameAdmin)
+admin.site.register(VideogameRating)
 admin.site.register(TokenResetPassword)

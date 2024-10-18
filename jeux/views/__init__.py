@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from ..models import Jeu
+from ..models import Videogame
 from .accueil import *
 from .ajouter_jeu_societe_bdd import *
 from .ajouter_jeu_video_bdd import *
@@ -15,31 +15,30 @@ from .mes_jeux_video import *
 @gestionnaire_erreur
 def index(request):
     if request.user.is_authenticated:
-        return redirect('jeux:accueil')
+        return redirect("jeux:accueil")
     else:
-        return render(request, 'jeux/index.html',
-                      {'jeux': Jeu.objects.all()})
+        return render(request, "jeux/index.html", {"jeux": Videogame.objects.all()})
 
 
 def bad_request(request, exception):
-    request.session['error_message'] = "Erreur 400.\\n"
-    request.session['error_not_seen'] = True
-    return redirect('jeux:index')
+    request.session["error_message"] = "Erreur 400.\\n"
+    request.session["error_not_seen"] = True
+    return redirect("jeux:index")
 
 
 def permission_denied(request, exception):
-    request.session['error_message'] = "Erreur 403.\\n"
-    request.session['error_not_seen'] = True
-    return redirect('jeux:index')
+    request.session["error_message"] = "Erreur 403.\\n"
+    request.session["error_not_seen"] = True
+    return redirect("jeux:index")
 
 
 def page_not_found(request, exception):
-    request.session['error_message'] = "Erreur 404.\\n"
-    request.session['error_not_seen'] = True
-    return redirect('jeux:index')
+    request.session["error_message"] = "Erreur 404.\\n"
+    request.session["error_not_seen"] = True
+    return redirect("jeux:index")
 
 
 def server_error(request):
-    request.session['error_message'] = "Erreur 500.\\n"
-    request.session['error_not_seen'] = True
-    return redirect('jeux:logoutside')
+    request.session["error_message"] = "Erreur 500.\\n"
+    request.session["error_not_seen"] = True
+    return redirect("jeux:logoutside")

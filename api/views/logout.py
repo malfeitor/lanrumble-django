@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
-from jeux.models import Joueur, Vote_Jeu_Video
+from jeux.models import Player, VideogameRating
 
 
 class LogoutView(APIView):
