@@ -30,3 +30,13 @@ class TestViewLogged(TestSetupLoged):
             secure=True,
         )
         self.assertEqual(request.status_code, 401)
+
+    def test_joueur_logout_bad_authorization_token(self):
+        self.client.credentials(HTTP_AUTHORIZATION="Bearer " + "dasdsad")
+        request = self.client.post(
+            "/api/logout/",
+            json.dumps({"refresh_token": self.refreshToken}),
+            content_type="application/json",
+            secure=True,
+        )
+        self.assertEqual(request.status_code, 401)
