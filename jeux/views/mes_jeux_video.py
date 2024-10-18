@@ -20,15 +20,15 @@ def mes_jeux(request):
             temp.append(jeu.title)
 
     for jeu in jeux_possedes:
-        if jeu.nom in temp:
-            temp.remove(jeu.nom)
+        if jeu.title in temp:
+            temp.remove(jeu.title)
 
     jeux_bdd = []
     for jeu in temp:
-        jeux_bdd.append(Videogame.objects.get(nom=jeu))
+        jeux_bdd.append(Videogame.objects.get(title=jeu))
     votes = list(
         VideogameRating.objects.filter(
-            joueur_concerne=Player.objects.get(utilisateur=request.user.id)
+            player=Player.objects.get(utilisateur=request.user.id)
         )
     )
     return render(
@@ -67,7 +67,7 @@ def mes_jeux_ajouter(request):
                 request.session["error_not_seen"] = True
                 request.session["error_message"] = (
                     "Erreur : "
-                    + jeu.nom
+                    + jeu.title
                     + " n'existe pas, ou est déjà dans votre liste.\\n"
                 )
     return redirect("jeux:mes_jeux")
@@ -98,7 +98,7 @@ def mes_jeux_enlever(request):
                     request.session["error_not_seen"] = False
                     request.session["error_message"] = (
                         "Erreur : "
-                        + jeu.nom
+                        + jeu.title
                         + " n'existe pas, ou n'est pas dans votre liste.\\n"
                     )
     joueur.save()
@@ -111,13 +111,9 @@ def ajax_vote_videogame(request):
     vote_value = request.POST.get("vote")
     game = Videogame.objects.get(id=request.POST.get("jeu")[3:])
     player = Player.objects.get(utilisateur=request.user.id)
-    vote = VideogameRating.objects.filter(jeu_concerne=game).filter(
-        joueur_concerne=player
-    )
+    vote = VideogameRating.objects.filter(jeu_concerne=game).filter(player=player)
     if len(vote) == 0:
-        vote = VideogameRating(
-            valeur=vote_value, jeu_concerne=game, joueur_concerne=player
-        )
+        vote = VideogameRating(valeur=vote_value, jeu_concerne=game, player=player)
         vote.save()
     else:
         vote[0].rating = vote_value

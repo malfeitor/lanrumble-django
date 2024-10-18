@@ -20,7 +20,7 @@ def accueil(request, error_message=False):
         liste_jeux = {}
         for ami in joueur.friends.exclude(utilisateur__groups__name="guest").all():
             amis[ami.utilisateur.username] = []
-            for jeu in ami.liste_jeux.all():
+            for jeu in ami.videogames_list.all():
                 try:
                     vote = (
                         VideogameRating.objects.filter(joueur_concerne=ami.id)
@@ -30,25 +30,25 @@ def accueil(request, error_message=False):
                     )
                 except Exception:
                     vote = 5
-                amis[ami.utilisateur.username].append([jeu.nom, vote])
+                amis[ami.utilisateur.username].append([jeu.title, vote])
 
         for jeu in joueur.videogames_list.all():
-            liste_jeux[jeu.nom] = {}
-            liste_jeux[jeu.nom]["id"] = jeu.id
-            liste_jeux[jeu.nom]["pvp"] = jeu.pvp
-            liste_jeux[jeu.nom]["coop"] = jeu.coop
-            liste_jeux[jeu.nom]["f2p"] = jeu.f2p
-            liste_jeux[jeu.nom]["joueurs_online"] = jeu.joueurs_max_online
-            liste_jeux[jeu.nom]["joueurs_hot_seat"] = jeu.joueurs_max_hot_seat
+            liste_jeux[jeu.title] = {}
+            liste_jeux[jeu.title]["id"] = jeu.id
+            liste_jeux[jeu.title]["pvp"] = jeu.pvp
+            liste_jeux[jeu.title]["coop"] = jeu.coop
+            liste_jeux[jeu.title]["f2p"] = jeu.f2p
+            liste_jeux[jeu.title]["joueurs_online"] = jeu.max_online_players
+            liste_jeux[jeu.title]["joueurs_hot_seat"] = jeu.max_hot_seat_players
             try:
-                liste_jeux[jeu.nom]["my_vote"] = (
-                    VideogameRating.objects.filter(joueur_concerne=joueur.id)
-                    .filter(jeu_concerne=jeu.id)
+                liste_jeux[jeu.title]["my_vote"] = (
+                    VideogameRating.objects.filter(player=joueur.id)
+                    .filter(videogame=jeu.id)
                     .get()
                     .rating
                 )
             except Exception:
-                liste_jeux[jeu.nom]["my_vote"] = 5
+                liste_jeux[jeu.title]["my_vote"] = 5
 
         if User.objects.get(username=joueur.utilisateur).email == "":
             request.session[

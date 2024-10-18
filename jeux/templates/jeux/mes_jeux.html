@@ -18,7 +18,7 @@
                             <th>
                                 <input type="checkbox" class="form-check-input" value="{{ jeu_bdd.id }}" name="jeu" style="margin-top: -1.5%;">
                             </th><th>
-                                <label for="{{ jeu_bdd.id }}" class="form-check-label">{{ jeu_bdd.nom }}</label>
+                                <label for="{{ jeu_bdd.id }}" class="form-check-label">{{ jeu_bdd.title }}</label>
                             </th>
                         </tr>
                         {% endfor %}
@@ -47,7 +47,7 @@
                                 <input type="checkbox" class="form-check-input" value="{{ jeu_poss.id }}" name="jeu" style="margin-top: -1.5%;">
                                 {% endif %}
                             </th><th>
-                                <label for="{{ jeu_poss.id }}" class="form-check-label">{{  jeu_poss.nom }}</label>
+                                <label for="{{ jeu_poss.id }}" class="form-check-label">{{  jeu_poss.title }}</label>
                             </th><th> &nbsp | &nbsp
                                 <i class="fas fa-star" id="vote-1"></i>
                                 <i class="fas fa-star" id="vote-2"></i>
