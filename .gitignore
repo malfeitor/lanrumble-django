@@ -6,8 +6,7 @@ uwsgi_params
 .venv
 .vscode
 
-**/__pycache__
-**/migrations
+**/**/__pycache__
 
 **/mysql.conf
 
