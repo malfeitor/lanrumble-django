@@ -8,6 +8,8 @@ COPY . /app
 RUN pip install --no-cache-dir -r requirements.txt --target=packages
 
 FROM python:3.11-alpine AS runtime
+RUN adduser -D appuser
+USER appuser
 COPY --from=build packages /usr/lib/python3.11/site-packages
 ENV PYTHONPATH=/usr/lib/python3.11/site-packages
 
